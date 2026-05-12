@@ -754,9 +754,355 @@
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
     }
+
+    /* ===================== MODE SELECTOR ===================== */
+    #mode-selector {
+      position: fixed; inset: 0; z-index: 190000;
+      background: #04040a;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; text-align: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.55s ease, visibility 0.55s ease;
+      overflow: hidden;
+    }
+    #mode-selector.visible { opacity: 1; visibility: visible; }
+    #mode-selector.gone    { display: none; }
+
+    /* Orbs behind mode selector */
+    .ms-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .ms-orb-1 { width: 60vw; height: 60vw; background: rgba(91,26,138,0.18); top: -20%; left: -10%; animation: orbFloat 14s ease-in-out infinite; }
+    .ms-orb-2 { width: 40vw; height: 40vw; background: rgba(110,231,247,0.07); bottom: -10%; right: -5%; animation: orbFloat 10s ease-in-out infinite reverse; }
+
+    .ms-inner { position: relative; z-index: 1; max-width: 860px; width: 100%; }
+
+    .ms-eyebrow {
+      font-family: 'Orbitron', sans-serif; font-size: 0.58rem; letter-spacing: 0.4em;
+      color: #6ee7f7; text-transform: uppercase; margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(110,231,247,0.3); padding: 7px 20px; border-radius: 30px;
+      background: rgba(110,231,247,0.06);
+      animation: fadeSlideDown 0.7s ease 0.2s both;
+    }
+    .ms-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7f7; animation: pulseDot 1.5s ease infinite; flex-shrink:0; }
+
+    .ms-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 900; color: #f0eeff; line-height: 1.2; margin-bottom: 10px;
+      animation: fadeSlideUp 0.8s ease 0.3s both;
+    }
+    .ms-title span { color: #ffd700; }
+
+    .ms-sub {
+      font-size: 1rem; color: rgba(144,144,192,0.7); margin-bottom: 48px;
+      animation: fadeSlideUp 0.8s ease 0.4s both;
+    }
+
+    /* The two pick cards */
+    .ms-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      animation: fadeSlideUp 0.8s ease 0.5s both;
+    }
+
+    .ms-card {
+      border-radius: 24px; padding: 40px 28px 32px; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s, border-color 0.35s;
+      border: 2px solid transparent;
+    }
+    .ms-card:hover { transform: translateY(-8px) scale(1.02); }
+
+    /* Dark card */
+    .ms-card.ms-dark {
+      background: linear-gradient(145deg, #0e0e1c 0%, #1a0a2e 60%, #0a0a18 100%);
+      border-color: rgba(139,47,201,0.55);
+      box-shadow: 0 0 50px rgba(90,20,140,0.4);
+    }
+    .ms-card.ms-dark:hover { border-color: #b06fe8; box-shadow: 0 20px 60px rgba(90,20,140,0.6); }
+    .ms-card.ms-dark::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(139,47,201,0.2) 0%, transparent 65%); }
+
+    /* Light card */
+    .ms-card.ms-light {
+      background: linear-gradient(145deg, #f8f4ff 0%, #ede5ff 60%, #f0e8ff 100%);
+      border-color: rgba(139,47,201,0.28);
+      box-shadow: 0 0 50px rgba(139,47,201,0.12);
+    }
+    .ms-card.ms-light:hover { border-color: #8b2fc9; box-shadow: 0 20px 60px rgba(139,47,201,0.22); }
+    .ms-card.ms-light::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(139,47,201,0.08) 0%, transparent 65%); }
+
+    /* Card inner content */
+    .ms-card-content { position: relative; z-index: 1; }
+
+    .ms-icon-wrap {
+      width: 72px; height: 72px; border-radius: 20px; margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s;
+    }
+    .ms-card:hover .ms-icon-wrap { transform: scale(1.1) rotate(8deg); }
+    .ms-card.ms-dark  .ms-icon-wrap { background: linear-gradient(135deg, #2a0a3e, #5b1a8a); box-shadow: 0 0 24px rgba(139,47,201,0.5); }
+    .ms-card.ms-light .ms-icon-wrap { background: linear-gradient(135deg, #e8d5ff, #d0b0ff); box-shadow: 0 0 24px rgba(139,47,201,0.2); }
+
+    .ms-mode-name {
+      font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .ms-card.ms-dark  .ms-mode-name { color: #ffd700; }
+    .ms-card.ms-light .ms-mode-name { color: #18083a; }
+
+    .ms-mode-desc { font-size: 0.9rem; line-height: 1.6; margin-bottom: 28px; }
+    .ms-card.ms-dark  .ms-mode-desc { color: rgba(144,144,192,0.75); }
+    .ms-card.ms-light .ms-mode-desc { color: rgba(60,30,100,0.65); }
+
+    /* Preview mini strip */
+    .ms-preview {
+      border-radius: 12px; height: 52px; overflow: hidden;
+      display: flex; gap: 6px; padding: 8px; margin-bottom: 24px;
+      border: 1px solid;
+    }
+    .ms-card.ms-dark  .ms-preview { background: #04040a; border-color: rgba(139,47,201,0.3); }
+    .ms-card.ms-light .ms-preview { background: #f6f2ff; border-color: rgba(139,47,201,0.2); }
+    .ms-preview-bar { border-radius: 4px; flex: 1; }
+
+    /* Pick button */
+    .ms-pick-btn {
+      display: inline-block; border-radius: 50px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em;
+      padding: 11px 28px; transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .ms-card.ms-dark .ms-pick-btn {
+      background: linear-gradient(135deg, #5b1a8a, #8b2fc9);
+      color: #fff; border: 1px solid #b06fe8;
+      box-shadow: 0 0 20px rgba(139,47,201,0.4);
+    }
+    .ms-card.ms-light .ms-pick-btn {
+      background: linear-gradient(135deg, #8b2fc9, #b06fe8);
+      color: #fff; border: 1px solid rgba(139,47,201,0.5);
+      box-shadow: 0 0 20px rgba(139,47,201,0.2);
+    }
+    .ms-card:hover .ms-pick-btn { transform: translateY(-2px); box-shadow: 0 0 32px rgba(139,47,201,0.6); }
+
+    /* Expand animation on pick */
+    .ms-card.expanding {
+      animation: cardExpand 0.6s cubic-bezier(0.4,0,0.2,1) forwards;
+      z-index: 2;
+    }
+    @keyframes cardExpand {
+      0%   { transform: scale(1); }
+      100% { transform: scale(8); opacity: 0; }
+    }
+    #mode-selector.fading { animation: fadeOut 0.5s ease 0.35s forwards; }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+    /* Mobile */
+    @media(max-width:640px){
+      .ms-cards { grid-template-columns: 1fr; gap: 16px; }
+      .ms-card { padding: 28px 20px 24px; border-radius: 20px; }
+      .ms-title { margin-bottom: 8px; }
+      .ms-sub { margin-bottom: 32px; font-size: 0.9rem; }
+      .ms-preview { display: none; }
+    }
+
+    /* ===================== BIRTHDAY GATE ===================== */
+    #birthday-gate {
+      position: fixed; inset: 0; z-index: 200000;
+      background: #04040a;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 24px;
+      overflow: hidden;
+    }
+    #birthday-gate.hidden { display: none; }
+    #birthday-gate.unlocking { animation: gateUnlock 1.6s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+    /* Animated background orbs for gate */
+    .gate-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .gate-orb-1 { width: 60vw; height: 60vw; background: rgba(91,26,138,0.18); top: -20%; left: -10%; animation: orbFloat 16s ease-in-out infinite; }
+    .gate-orb-2 { width: 40vw; height: 40vw; background: rgba(110,231,247,0.08); bottom: -10%; right: -5%; animation: orbFloat 12s ease-in-out infinite reverse; }
+    .gate-orb-3 { width: 30vw; height: 30vw; background: rgba(255,215,0,0.06); top: 30%; right: 20%; animation: orbFloat 10s ease-in-out 3s infinite; }
+
+    /* Claw marks */
+    .gate-claw { position: absolute; pointer-events: none; opacity: 0.12; }
+    .gate-claw.tl { top: 0; left: 0; }
+    .gate-claw.br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+    /* Gate content */
+    .gate-inner { position: relative; z-index: 1; max-width: 640px; width: 100%; }
+
+    .gate-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.58rem; letter-spacing: 0.4em;
+      color: #6ee7f7; text-transform: uppercase;
+      border: 1px solid rgba(110,231,247,0.35); padding: 8px 22px; border-radius: 30px;
+      background: rgba(110,231,247,0.07); margin-bottom: 32px;
+      animation: fadeSlideDown 0.8s ease 0.4s both;
+    }
+    .gate-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7f7; animation: pulseDot 1.5s ease infinite; flex-shrink: 0; }
+
+    .gate-title {
+      font-family: 'Cinzel', serif; font-size: clamp(3rem, 12vw, 8rem);
+      font-weight: 900; line-height: 0.9; margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, #ffd700 40%, #b06fe8 75%, #fff 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: fadeSlideUp 0.9s ease 0.5s both, textShimmer 5s linear 2s infinite;
+    }
+    .gate-sub {
+      font-family: 'Cinzel', serif; font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: rgba(144,144,192,0.75); letter-spacing: 0.1em; margin-bottom: 44px;
+      animation: fadeSlideUp 0.9s ease 0.7s both;
+    }
+
+    /* Countdown tiles */
+    .gate-countdown {
+      display: flex; gap: 14px; align-items: center; justify-content: center;
+      margin-bottom: 44px; animation: fadeSlideUp 0.9s ease 0.9s both;
+      flex-wrap: nowrap;
+    }
+    .gate-tile {
+      background: rgba(14,14,28,0.9); border: 1px solid rgba(139,47,201,0.45);
+      border-radius: 16px; padding: 20px 18px; min-width: 90px; text-align: center;
+      box-shadow: 0 0 40px rgba(90,20,140,0.3), inset 0 0 20px rgba(139,47,201,0.06);
+      position: relative; overflow: hidden; flex-shrink: 0;
+    }
+    .gate-tile::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%); }
+    .gate-num {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900; color: #ffd700; line-height: 1;
+      filter: drop-shadow(0 0 18px rgba(255,215,0,0.55));
+      transition: transform 0.15s ease;
+    }
+    .gate-num.flip { animation: numFlip 0.2s ease; }
+    .gate-unit {
+      font-family: 'Orbitron', sans-serif; font-size: 0.48rem; letter-spacing: 0.22em;
+      color: rgba(80,80,160,0.9); text-transform: uppercase; margin-top: 7px;
+    }
+    .gate-sep {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 3.2rem);
+      color: rgba(80,80,160,0.55); line-height: 1; padding-bottom: 20px;
+      animation: sepPulse 1s ease infinite;
+    }
+
+    .gate-date {
+      font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em;
+      color: #ffd700; margin-bottom: 14px; animation: fadeIn 1s ease 1.2s both;
+    }
+    .gate-hint {
+      font-size: 0.92rem; color: rgba(144,144,192,0.55); line-height: 1.7;
+      max-width: 400px; margin: 0 auto; animation: fadeIn 1s ease 1.5s both;
+    }
+
+    /* Particles canvas for gate */
+    #gate-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+    /* Unlock flash overlay */
+    .gate-flash {
+      position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,215,0,0.4) 0%, transparent 70%);
+      opacity: 0; pointer-events: none; z-index: 2;
+    }
+    .gate-flash.active { animation: flashBurst 1s ease forwards; }
+    .gate-unlock-msg {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 3; opacity: 0; pointer-events: none;
+    }
+    .gate-unlock-msg.active { animation: fadeIn 0.5s ease forwards; }
+    .gate-unlock-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; color: #ffd700; letter-spacing: 0.1em; text-shadow: 0 0 60px rgba(255,215,0,0.8); }
+    .gate-unlock-sub { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 0.4em; color: #6ee7f7; margin-top: 12px; }
+
+    @keyframes gateUnlock {
+      0%   { opacity: 1; transform: scale(1); }
+      40%  { opacity: 1; transform: scale(1.04); }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+    @keyframes sepPulse { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
+    @keyframes flashBurst { 0%{opacity:0} 20%{opacity:1} 100%{opacity:0} }
+    @keyframes numFlip { 0%{transform:translateY(-6px);opacity:0.4} 100%{transform:translateY(0);opacity:1} }
+
+    /* Gate responsive */
+    @media(max-width:768px){
+      .gate-badge { font-size: 0.44rem; letter-spacing: 0.2em; padding: 7px 14px; }
+      .gate-countdown { gap: 8px; margin-bottom: 32px; }
+      .gate-tile { min-width: 68px; padding: 14px 12px; border-radius: 12px; }
+      .gate-sub { margin-bottom: 32px; }
+    }
+    @media(max-width:480px){
+      .gate-countdown { gap: 5px; }
+      .gate-tile { min-width: 56px; padding: 12px 10px; border-radius: 10px; }
+      .gate-num { font-size: 1.55rem; }
+      .gate-sep { font-size: 1.55rem; padding-bottom: 16px; }
+      .gate-unit { font-size: 0.4rem; }
+      .gate-hint { font-size: 0.82rem; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ==================== BIRTHDAY GATE ==================== -->
+<div id="birthday-gate">
+  <canvas id="gate-canvas"></canvas>
+
+  <!-- Animated bg orbs -->
+  <div class="gate-orb gate-orb-1"></div>
+  <div class="gate-orb gate-orb-2"></div>
+  <div class="gate-orb gate-orb-3"></div>
+
+  <!-- Claw decorations -->
+  <svg class="gate-claw tl" width="220" height="300" viewBox="0 0 220 300" fill="none" aria-hidden="true">
+    <path d="M0 0 L90 300" stroke="url(#gcg1)" stroke-width="3"/>
+    <path d="M40 0 L130 300" stroke="url(#gcg1)" stroke-width="2"/>
+    <path d="M80 0 L170 300" stroke="url(#gcg1)" stroke-width="2.5"/>
+    <path d="M120 0 L210 300" stroke="url(#gcg1)" stroke-width="1.5"/>
+    <defs><linearGradient id="gcg1" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#8b2fc9"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+  </svg>
+  <svg class="gate-claw br" width="220" height="300" viewBox="0 0 220 300" fill="none" aria-hidden="true">
+    <path d="M0 0 L90 300" stroke="url(#gcg2)" stroke-width="3"/>
+    <path d="M40 0 L130 300" stroke="url(#gcg2)" stroke-width="2"/>
+    <path d="M80 0 L170 300" stroke="url(#gcg2)" stroke-width="2.5"/>
+    <path d="M120 0 L210 300" stroke="url(#gcg2)" stroke-width="1.5"/>
+    <defs><linearGradient id="gcg2" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#8b2fc9"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+  </svg>
+
+  <!-- Flash & unlock message overlays -->
+  <div class="gate-flash" id="gate-flash"></div>
+  <div class="gate-unlock-msg" id="gate-unlock-msg">
+    <div class="gate-unlock-title">Wakanda Forever</div>
+    <div class="gate-unlock-sub">The King's Day Has Arrived</div>
+  </div>
+
+  <!-- Main gate content -->
+  <div class="gate-inner">
+    <div class="gate-badge"><span class="gate-badge-dot"></span>Wakanda Forever</div>
+
+    <h1 class="gate-title">Jaideep</h1>
+    <p class="gate-sub">The King's Birthday · Unlocking in</p>
+
+    <div class="gate-countdown">
+      <div class="gate-tile">
+        <div class="gate-num" id="gate-d">00</div>
+        <div class="gate-unit">Days</div>
+      </div>
+      <div class="gate-sep">:</div>
+      <div class="gate-tile">
+        <div class="gate-num" id="gate-h">00</div>
+        <div class="gate-unit">Hours</div>
+      </div>
+      <div class="gate-sep">:</div>
+      <div class="gate-tile">
+        <div class="gate-num" id="gate-m">00</div>
+        <div class="gate-unit">Mins</div>
+      </div>
+      <div class="gate-sep">:</div>
+      <div class="gate-tile">
+        <div class="gate-num" id="gate-s">00</div>
+        <div class="gate-unit">Secs</div>
+      </div>
+    </div>
+
+    <p class="gate-date">13 · 05 · 2026</p>
+    <p class="gate-hint">
+      Something special is waiting on the other side.<br/>
+      Share this link — the celebration unlocks at midnight on May 13.
+    </p>
+  </div>
+</div>
 
 <!-- Loading Screen -->
 <div id="loading">
@@ -1536,6 +1882,99 @@ function closeMenu(){ hamBtn.classList.remove('open'); mobileMenu.classList.remo
 hamBtn.addEventListener('click', ()=> hamBtn.classList.contains('open') ? closeMenu() : openMenu());
 document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+// ===== BIRTHDAY GATE =====
+(function(){
+  const gate       = document.getElementById('birthday-gate');
+  const BIRTHDAY   = new Date(2026, 4, 13, 0, 0, 0); // May 13 2026 midnight local
+
+  // Gate particle canvas
+  const gc  = document.getElementById('gate-canvas');
+  const gctx = gc.getContext('2d');
+  let gW, gH, gParts = [];
+  function gResize(){ gW = gc.width = window.innerWidth; gH = gc.height = window.innerHeight; }
+  gResize(); window.addEventListener('resize', gResize);
+  const GCOLS = ['#ffd700','#8b2fc9','#b06fe8','#6ee7f7','#f39c12'];
+  for(let i=0;i<80;i++) gParts.push({ x:Math.random()*1920, y:Math.random()*1080, r:Math.random()*1.8+0.4, c:GCOLS[i%GCOLS.length], vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35, a:Math.random()*.45+.2, p:Math.random()*Math.PI*2 });
+  function drawGate(){
+    if(!gate || gate.classList.contains('hidden')) return;
+    gctx.clearRect(0,0,gW,gH);
+    gParts.forEach(p=>{
+      p.p+=.012; p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=gW; if(p.x>gW)p.x=0; if(p.y<0)p.y=gH; if(p.y>gH)p.y=0;
+      const a=p.a*(.7+.3*Math.sin(p.p));
+      gctx.beginPath(); gctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      gctx.fillStyle=p.c+Math.round(a*255).toString(16).padStart(2,'0');
+      gctx.fill();
+    });
+    for(let i=0;i<gParts.length;i++) for(let j=i+1;j<gParts.length;j++){
+      const dx=gParts[i].x-gParts[j].x, dy=gParts[i].y-gParts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){ gctx.beginPath(); gctx.moveTo(gParts[i].x,gParts[i].y); gctx.lineTo(gParts[j].x,gParts[j].y); gctx.strokeStyle=`rgba(139,47,201,${.05*(1-d/90)})`; gctx.lineWidth=.5; gctx.stroke(); }
+    }
+    requestAnimationFrame(drawGate);
+  }
+  drawGate();
+
+  function fmt(n){ return String(n).padStart(2,'0'); }
+
+  function flipNum(el, val){
+    const s = fmt(val);
+    if(el.textContent !== s){ el.textContent = s; el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+  }
+
+  function unlockGate(){
+    // Confetti burst
+    launchConfetti(); setTimeout(launchConfetti, 600); setTimeout(launchConfetti, 1200);
+    // Flash
+    const flash = document.getElementById('gate-flash');
+    flash.classList.add('active');
+    // Show unlock message
+    setTimeout(()=>{
+      document.getElementById('gate-unlock-msg').classList.add('active');
+    }, 400);
+    // Animate gate away
+    setTimeout(()=>{
+      gate.classList.add('unlocking');
+      gate.addEventListener('animationend', ()=>{
+        gate.classList.add('hidden');
+        launchConfetti(); launchConfetti();
+      }, { once: true });
+    }, 1800);
+  }
+
+  function tick(){
+    const now  = new Date();
+    const diff = BIRTHDAY - now;
+    if(diff <= 0){
+      // Birthday! Hide gate or unlock
+      gate.classList.add('hidden');
+      return;
+    }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    flipNum(document.getElementById('gate-d'), d);
+    flipNum(document.getElementById('gate-h'), h);
+    flipNum(document.getElementById('gate-m'), m);
+    flipNum(document.getElementById('gate-s'), s);
+
+    // If we just hit zero, unlock
+    if(d===0 && h===0 && m===0 && s===0){ clearInterval(gateTimer); setTimeout(unlockGate, 1000); }
+  }
+
+  // Check right now
+  if(new Date() >= BIRTHDAY){
+    gate.classList.add('hidden');
+  } else {
+    tick();
+    var gateTimer = setInterval(tick, 1000);
+    // Prevent body scroll while gate is open
+    document.body.style.overflow = 'hidden';
+    // Restore scroll when gate is gone
+    gate.addEventListener('animationend', ()=>{ document.body.style.overflow=''; }, { once: true });
+  }
+})();
 
 // ===== CARD 3D TILT =====
 document.querySelectorAll('.tilt-card').forEach(card=>{
