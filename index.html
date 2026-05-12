@@ -797,6 +797,25 @@
     #scroll-top.visible { opacity:1; transform:translateY(0); }
     #scroll-top:hover { box-shadow:0 0 32px rgba(139,47,201,0.7); transform:translateY(-4px); }
 
+    /* ===== AUTO SCROLL TOAST ===== */
+    #autoscroll-toast {
+      position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-16px);
+      z-index: 9500; pointer-events: none;
+      background: rgba(14,14,28,0.92); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.35); border-radius: 50px;
+      padding: 10px 22px; display: flex; align-items: center; gap: 10px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em;
+      color: var(--text-primary); white-space: nowrap;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    #autoscroll-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .toast-dot.scrolling { background: #25d366; animation: toastPulse 1s ease infinite; }
+    .toast-dot.paused    { background: #f39c12; animation: none; }
+    @keyframes toastPulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
     /* ===== FLOATING BIRTHDAY COUNTDOWN ===== */
     #bday-float {
       position: fixed; bottom: 32px; left: 32px; z-index: 9000;
@@ -836,6 +855,58 @@
       #bday-float { bottom: 20px; left: 16px; padding: 8px 14px 8px 11px; }
       .bf-time { font-size: 0.7rem; }
     }
+
+    /* ===== 3D SCROLL ANIMATIONS ===== */
+
+    /* Tilt-in from top (like a book opening) */
+    .reveal-3d {
+      opacity: 0;
+      transform: perspective(1200px) rotateX(32deg) translateY(48px);
+      transition: opacity 0.9s ease, transform 0.95s cubic-bezier(0.22,1,0.36,1);
+      transform-origin: top center;
+      will-change: transform, opacity;
+    }
+    .reveal-3d.visible { opacity: 1; transform: perspective(1200px) rotateX(0deg) translateY(0); }
+
+    /* Flip in from right */
+    .reveal-flip-r {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(-50deg) translateX(60px);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+    }
+    .reveal-flip-r.visible { opacity: 1; transform: perspective(1000px) rotateY(0deg) translateX(0); }
+
+    /* Flip in from left */
+    .reveal-flip-l {
+      opacity: 0;
+      transform: perspective(1000px) rotateY(50deg) translateX(-60px);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+    }
+    .reveal-flip-l.visible { opacity: 1; transform: perspective(1000px) rotateY(0deg) translateX(0); }
+
+    /* Pop up from depth */
+    .reveal-pop3d {
+      opacity: 0;
+      transform: perspective(900px) scale(0.72) translateZ(-120px) rotateX(18deg);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.34,1.48,0.64,1);
+      transform-origin: center bottom;
+      will-change: transform, opacity;
+    }
+    .reveal-pop3d.visible { opacity: 1; transform: perspective(900px) scale(1) translateZ(0) rotateX(0); }
+
+    /* Spin-in for small decorative elements */
+    .reveal-spin3d {
+      opacity: 0;
+      transform: perspective(700px) rotateY(90deg) scale(0.8);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, opacity;
+    }
+    .reveal-spin3d.visible { opacity: 1; transform: perspective(700px) rotateY(0deg) scale(1); }
+
+    /* Scroll-driven depth parallax (applied via JS) */
+    .s-parallax { will-change: transform; }
 
     /* ===== VIBRANIUM LINE ===== */
     .vibranium-line { height:2px; margin:0 auto; border-radius:1px; background:linear-gradient(90deg,transparent,var(--vibranium),transparent); animation:shimmer 3s ease infinite; }
@@ -1178,6 +1249,91 @@
       .ms-preview { display: none; }
     }
 
+    /* ===================== MOBILE WARNING ===================== */
+    #mobile-warn {
+      position: fixed; inset: 0; z-index: 400000;
+      background: #04040a;
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 20px; text-align: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #mobile-warn.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .mw-orb1 { position:absolute; width:70vw; height:70vw; border-radius:50%; background:rgba(91,26,138,0.18); filter:blur(100px); top:-20%; left:-15%; pointer-events:none; animation:orbFloat 14s ease-in-out infinite; }
+    .mw-orb2 { position:absolute; width:50vw; height:50vw; border-radius:50%; background:rgba(110,231,247,0.07); filter:blur(80px); bottom:-10%; right:-10%; pointer-events:none; animation:orbFloat 10s ease-in-out infinite reverse; }
+
+    .mw-inner { position:relative; z-index:1; max-width:360px; width:100%; }
+
+    /* Desktop icon */
+    .mw-icon-wrap {
+      width:80px; height:80px; border-radius:24px; margin:0 auto 24px;
+      background:linear-gradient(135deg,#1a0a2e,#5b1a8a);
+      border:2px solid rgba(139,47,201,0.5);
+      box-shadow:0 0 40px rgba(139,47,201,0.45);
+      display:flex; align-items:center; justify-content:center;
+      animation:fadeSlideDown 0.6s ease 0.1s both;
+    }
+
+    .mw-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.3em;
+      color:#6ee7f7; border:1px solid rgba(110,231,247,0.3);
+      padding:6px 16px; border-radius:30px; background:rgba(110,231,247,0.06);
+      margin-bottom:20px;
+      animation:fadeSlideDown 0.6s ease 0.15s both;
+    }
+    .mw-badge-dot { width:5px; height:5px; border-radius:50%; background:#6ee7f7; animation:pulseDot 1.5s ease infinite; }
+
+    .mw-title {
+      font-family:'Cinzel',serif; font-size:clamp(1.4rem,6vw,2rem);
+      font-weight:900; color:#f0eeff; line-height:1.25; margin-bottom:14px;
+      animation:fadeSlideUp 0.7s ease 0.2s both;
+    }
+    .mw-title span { color:#ffd700; }
+
+    .mw-desc {
+      font-size:0.92rem; color:rgba(144,144,192,0.75);
+      line-height:1.7; margin-bottom:32px;
+      animation:fadeSlideUp 0.7s ease 0.3s both;
+    }
+    .mw-desc strong { color:#f0eeff; }
+
+    /* Feature chips */
+    .mw-chips {
+      display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+      margin-bottom:32px;
+      animation:fadeSlideUp 0.7s ease 0.35s both;
+    }
+    .mw-chip {
+      font-size:0.65rem; padding:5px 12px; border-radius:20px;
+      background:rgba(139,47,201,0.12); border:1px solid rgba(139,47,201,0.3);
+      color:rgba(176,111,232,0.9); font-family:'Orbitron',sans-serif; letter-spacing:0.06em;
+    }
+
+    /* Buttons */
+    .mw-btn-primary {
+      display:block; width:100%; padding:15px;
+      background:linear-gradient(135deg,#5b1a8a,#8b2fc9);
+      color:#fff; border:none; border-radius:14px;
+      font-family:'Orbitron',sans-serif; font-size:0.68rem; letter-spacing:0.15em;
+      cursor:pointer; margin-bottom:12px;
+      box-shadow:0 0 30px rgba(139,47,201,0.4);
+      transition:box-shadow 0.3s,transform 0.2s;
+      animation:fadeSlideUp 0.7s ease 0.4s both;
+    }
+    .mw-btn-primary:hover { box-shadow:0 0 48px rgba(139,47,201,0.65); transform:translateY(-2px); }
+
+    .mw-btn-secondary {
+      display:block; width:100%; padding:12px;
+      background:transparent; color:rgba(144,144,192,0.55);
+      border:1px solid rgba(144,144,192,0.2); border-radius:14px;
+      font-family:'Rajdhani',sans-serif; font-size:0.85rem; letter-spacing:0.05em;
+      cursor:pointer;
+      transition:color 0.2s,border-color 0.2s;
+      animation:fadeSlideUp 0.7s ease 0.45s both;
+    }
+    .mw-btn-secondary:hover { color:#f0eeff; border-color:rgba(144,144,192,0.4); }
+
     /* ===================== PASSWORD SCREEN ===================== */
     #pw-screen {
       position: fixed; inset: 0; z-index: 300000;
@@ -1419,6 +1575,41 @@
 </head>
 <body>
 
+<!-- ==================== MOBILE WARNING ==================== -->
+<div id="mobile-warn">
+  <div class="mw-orb1"></div>
+  <div class="mw-orb2"></div>
+  <div class="mw-inner">
+
+    <div class="mw-icon-wrap">
+      <!-- Desktop monitor icon -->
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b06fe8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+    </div>
+
+    <div class="mw-badge"><span class="mw-badge-dot"></span>Best Viewed on Desktop</div>
+
+    <h1 class="mw-title">For the <span>Best Experience</span></h1>
+    <p class="mw-desc">
+      This site is packed with <strong>3D animations, parallax effects &amp; cinematic transitions</strong> — all of which look stunning on a larger screen.<br/><br/>
+      Open it on your <strong>Laptop or PC</strong> for the full Wakanda experience. 🖥️
+    </p>
+
+    <div class="mw-chips">
+      <span class="mw-chip">3D Animations</span>
+      <span class="mw-chip">Parallax Scroll</span>
+      <span class="mw-chip">Auto Tour</span>
+      <span class="mw-chip">Gallery Lightbox</span>
+    </div>
+
+    <button class="mw-btn-primary" id="mw-desktop-btn">Open on Desktop Instead</button>
+    <button class="mw-btn-secondary" id="mw-continue-btn">Continue on Mobile Anyway</button>
+  </div>
+</div>
+
 <!-- ==================== PASSWORD SCREEN ==================== -->
 <div id="pw-screen">
   <div class="pw-orb pw-orb-1"></div>
@@ -1657,6 +1848,12 @@
   </button>
 </nav>
 
+<!-- Auto Scroll Toast -->
+<div id="autoscroll-toast">
+  <span class="toast-dot scrolling" id="toast-dot"></span>
+  <span id="toast-msg">Auto-scrolling — move mouse to pause</span>
+</div>
+
 <!-- Floating Birthday Countdown -->
 <div id="bday-float" aria-live="polite">
   <span class="bf-cake">🎂</span>
@@ -1825,7 +2022,16 @@
     </div>
 
     <p class="hero-date">13 · 05 · 2001 &rarr; 13 · 05 · 2026</p>
-    <a href="#about" class="hero-cta">Explore the Legacy</a>
+    <a href="#about" class="hero-cta" id="auto-scroll-btn" style="display:inline-flex;align-items:center;gap:14px;padding:14px 28px 14px 20px;">
+      <!-- Play circle -->
+      <span id="cta-icon" style="width:42px;height:42px;border-radius:50%;background:rgba(255,215,0,0.15);border:2px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s,background 0.3s;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>
+      </span>
+      <span style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+        <span id="cta-text" style="font-size:0.85rem;letter-spacing:0.14em;">START THE TOUR</span>
+        <span id="cta-sub" style="font-size:0.6rem;letter-spacing:0.1em;color:rgba(255,215,0,0.6);font-weight:400;">AUTO-SCROLL THROUGH THE STORY</span>
+      </span>
+    </a>
   </div>
 
   <div class="scroll-hint" aria-hidden="true">
@@ -2688,6 +2894,49 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   }
 })();
 
+// ===== MOBILE WARNING =====
+(function(){
+  const warn        = document.getElementById('mobile-warn');
+  const continueBtn = document.getElementById('mw-continue-btn');
+  const desktopBtn  = document.getElementById('mw-desktop-btn');
+  if(!warn) return;
+
+  const isMobile = window.innerWidth <= 900;
+  const dismissed = sessionStorage.getItem('mw_ok');
+
+  if(!isMobile || dismissed){
+    warn.classList.add('gone');
+    warn.style.display = 'none';
+    return;
+  }
+
+  // Show warning on mobile
+  function dismiss(){
+    sessionStorage.setItem('mw_ok','1');
+    warn.classList.add('gone');
+    setTimeout(()=> warn.remove(), 550);
+  }
+
+  continueBtn.addEventListener('click', dismiss);
+
+  // "Open on Desktop" — copy link, show feedback
+  desktopBtn.addEventListener('click', ()=>{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(window.location.href).then(()=>{
+        desktopBtn.textContent = '✓ Link Copied — Open on Desktop!';
+        desktopBtn.style.background = 'linear-gradient(135deg,#1a5a2e,#25a244)';
+        setTimeout(()=>{
+          desktopBtn.textContent = 'Open on Desktop Instead';
+          desktopBtn.style.background = '';
+        }, 2500);
+      });
+    } else {
+      // Fallback — just show the URL
+      prompt('Copy this link and open on desktop:', window.location.href);
+    }
+  });
+})();
+
 // ===== PASSWORD SCREEN =====
 (function(){
   const PW       = 'tripletrouble';
@@ -2823,6 +3072,290 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   closeBtn.addEventListener('click', closePanel);
   backdrop.addEventListener('click', closePanel);
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closePanel(); });
+})();
+
+// ===== 3D SCROLL ANIMATIONS =====
+(function(){
+
+  /* --- 1. Assign 3D reveal classes to elements --- */
+  const assign = (sel, cls, delayStep) => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add(cls);
+      if(delayStep) el.style.transitionDelay = (i * delayStep) + 's';
+    });
+  };
+
+  // Section eyebrow labels → tilt in from top
+  assign('.section-label', 'reveal-3d', 0);
+
+  // Stat cards → pop from depth with stagger
+  assign('.stat-card', 'reveal-pop3d', 0.08);
+
+  // Fact cards → alternating left/right flip
+  document.querySelectorAll('.fact-card').forEach((el, i) => {
+    el.classList.add(i % 2 === 0 ? 'reveal-flip-l' : 'reveal-flip-r');
+    el.style.transitionDelay = (i * 0.09) + 's';
+  });
+
+  // Gallery trip cards → flip alternating
+  document.querySelectorAll('.trip-card').forEach((el, i) => {
+    el.classList.add(i % 2 === 0 ? 'reveal-flip-r' : 'reveal-flip-l');
+    el.style.transitionDelay = (i * 0.06) + 's';
+  });
+
+  // Office cards → pop from depth
+  assign('.o-card', 'reveal-pop3d', 0.07);
+
+  // Triple cards get spin-in (they also have tilt, so override only entrance)
+  document.querySelectorAll('.triple-card').forEach((el, i) => {
+    el.classList.add('reveal-spin3d');
+    el.style.transitionDelay = (i * 0.12) + 's';
+  });
+
+  // WA pinned message
+  assign('.wa-pinned-wrap', 'reveal-3d', 0);
+
+  /* --- 2. Observe all 3D reveal classes --- */
+  const allReveal = document.querySelectorAll(
+    '.reveal-3d,.reveal-flip-r,.reveal-flip-l,.reveal-pop3d,.reveal-spin3d'
+  );
+  const obs3d = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); obs3d.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  allReveal.forEach(el => obs3d.observe(el));
+
+  /* --- 3. Continuous scroll-driven parallax --- */
+  // Mark elements for parallax
+  const parallaxMap = [
+    { sel: '#hero .mesh-orb:nth-child(1)',    speed: -0.18 },
+    { sel: '#hero .mesh-orb:nth-child(2)',    speed:  0.12 },
+    { sel: '#about .mesh-orb:nth-child(1)',   speed: -0.14 },
+    { sel: '.about-photo-box',                speed:  0.08 },
+    { sel: '.gym-visual',                     speed: -0.07 },
+    { sel: '.triple-badge',                   speed:  0.05 },
+    { sel: '.vibranium-line',                 speed: -0.06 },
+    { sel: '.withmaa-photo',                  speed:  0.07 },
+  ];
+
+  const parallaxEls = [];
+  parallaxMap.forEach(({ sel, speed }) => {
+    document.querySelectorAll(sel).forEach(el => {
+      el.classList.add('s-parallax');
+      parallaxEls.push({ el, speed, baseY: 0 });
+    });
+  });
+
+  // Scroll-driven section perspective tilt
+  const sectionTilts = [
+    { sel: '#about',   factor: 0.012 },
+    { sel: '#triple',  factor: 0.010 },
+    { sel: '#gallery', factor: 0.009 },
+    { sel: '#gym',     factor: 0.010 },
+    { sel: '#office',  factor: 0.008 },
+  ];
+
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function onScroll(){
+    lastScrollY = window.scrollY;
+    if(!ticking){ requestAnimationFrame(updateParallax); ticking = true; }
+  }
+
+  function updateParallax(){
+    const sy = lastScrollY;
+
+    // Orb & element parallax
+    parallaxEls.forEach(({ el, speed }) => {
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const offset = (window.innerHeight / 2 - center) * speed;
+      el.style.transform = `translateY(${offset}px)`;
+    });
+
+    // Section perspective tilt based on scroll velocity
+    sectionTilts.forEach(({ sel, factor }) => {
+      const sec = document.querySelector(sel);
+      if(!sec) return;
+      const rect = sec.getBoundingClientRect();
+      if(rect.top > window.innerHeight || rect.bottom < 0) return;
+      const progress = 1 - (rect.top / window.innerHeight);
+      const tilt = Math.max(-4, Math.min(4, (0.5 - progress) * 8));
+      sec.style.transform = `perspective(1800px) rotateX(${tilt * factor * 100}deg)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  updateParallax();
+
+  /* --- 4. Gallery card depth hover parallax --- */
+  document.querySelectorAll('.trip-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - 0.5) * 14;
+      const y = ((e.clientY - r.top)  / r.height - 0.5) * -14;
+      const img = card.querySelector('img');
+      if(img) img.style.transform = `scale(1.08) translate(${x*0.5}px,${y*0.5}px)`;
+      card.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateY(-6px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      const img = card.querySelector('img');
+      if(img) img.style.transform = '';
+      card.style.transform = '';
+    });
+  });
+
+})();
+
+// ===== AUTO SCROLL =====
+(function(){
+  const btn      = document.getElementById('auto-scroll-btn');
+  const ctaText  = document.getElementById('cta-text');
+  const ctaIcon  = document.getElementById('cta-icon');
+  const toast    = document.getElementById('autoscroll-toast');
+  const toastMsg = document.getElementById('toast-msg');
+  const toastDot = document.getElementById('toast-dot');
+  if(!btn) return;
+
+  const SECTION_IDS = ['about','triple','gallery','gym','office','withmaa','message'];
+  const SPEED       = 2.5;   // px per frame while crawling through section
+  const NAV_H       = 70;    // navbar height offset
+
+  let isScrolling = false;
+  let paused      = false;
+  let currentIdx  = -1;
+  let rafId       = null;
+  let resumeTimer = null;
+  let jumpTimer   = null;
+  let phase       = 'idle'; // 'jumping' | 'crawling' | 'idle'
+
+  const labels = { about:'About Jaideep', triple:'Triple Trouble', gallery:'Trip Chronicles',
+                   gym:'Gym & Gains', office:'Office Life', withmaa:'With Maa', message:'Message' };
+
+  function showToast(msg, state){
+    toastMsg.textContent = msg;
+    toastDot.className = 'toast-dot ' + state;
+    toast.classList.add('show');
+  }
+  function hideToast(){ toast.classList.remove('show'); }
+
+  /* ---- Jump to section then start crawling ---- */
+  function jumpToSection(idx){
+    if(idx >= SECTION_IDS.length){ stopScroll(); return; }
+    currentIdx = idx;
+    phase = 'jumping';
+    const id  = SECTION_IDS[idx];
+    const el  = document.getElementById(id);
+    if(!el){ jumpToSection(idx + 1); return; }
+
+    showToast(`📍 ${labels[id] || id} — scrolling through`, 'scrolling');
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+
+    // After smooth-scroll settles (~900ms), start crawling
+    clearTimeout(jumpTimer);
+    jumpTimer = setTimeout(()=>{
+      if(!isScrolling || paused) return;
+      phase = 'crawling';
+      crawl();
+    }, 950);
+  }
+
+  /* ---- Crawl pixel-by-pixel through current section ---- */
+  function crawl(){
+    if(!isScrolling || paused){ cancelAnimationFrame(rafId); return; }
+
+    const nextId  = SECTION_IDS[currentIdx + 1];
+    const nextEl  = nextId ? document.getElementById(nextId) : null;
+    const limit   = nextEl
+      ? nextEl.getBoundingClientRect().top + window.scrollY - NAV_H
+      : document.body.scrollHeight - window.innerHeight;
+
+    if(window.scrollY >= limit - 2){
+      // Reached end of this section — jump to next
+      cancelAnimationFrame(rafId);
+      setTimeout(()=>{
+        if(!isScrolling || paused) return;
+        jumpToSection(currentIdx + 1);
+      }, 400);
+      return;
+    }
+
+    window.scrollBy(0, SPEED);
+    rafId = requestAnimationFrame(crawl);
+  }
+
+  /* ---- Start / Stop / Pause / Resume ---- */
+  const ctaSub = document.getElementById('cta-sub');
+
+  function startScroll(){
+    isScrolling = true; paused = false;
+    ctaText.textContent = 'STOP TOUR';
+    if(ctaSub) ctaSub.textContent = 'CLICK TO END THE TOUR';
+    // Swap play → stop icon
+    ctaIcon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><rect x="4" y="4" width="6" height="16" rx="1"/><rect x="14" y="4" width="6" height="16" rx="1"/></svg>';
+    ctaIcon.style.background = 'rgba(255,215,0,0.22)';
+    btn.style.background = 'linear-gradient(135deg,#1a0a2e,#5b1a8a)';
+    showToast('🚀 Tour starting…', 'scrolling');
+    setTimeout(()=>{ if(isScrolling) jumpToSection(0); }, 500);
+  }
+
+  function stopScroll(){
+    isScrolling = false; paused = false; phase = 'idle';
+    cancelAnimationFrame(rafId);
+    clearTimeout(jumpTimer);
+    clearTimeout(resumeTimer);
+    ctaText.textContent = 'START THE TOUR';
+    if(ctaSub) ctaSub.textContent = 'AUTO-SCROLL THROUGH THE STORY';
+    // Restore play icon
+    ctaIcon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>';
+    ctaIcon.style.background = 'rgba(255,215,0,0.15)';
+    btn.style.background = '';
+    hideToast();
+  }
+
+  function pauseScroll(){
+    if(!isScrolling || paused) return;
+    paused = true;
+    cancelAnimationFrame(rafId);
+    clearTimeout(jumpTimer);
+    clearTimeout(resumeTimer);
+    showToast('⚠️ Mouse moved — paused', 'paused');
+    resumeTimer = setTimeout(resumeScroll, 2200);
+  }
+
+  function resumeScroll(){
+    if(!isScrolling || !paused) return;
+    paused = false;
+    const id = SECTION_IDS[currentIdx] || '';
+    showToast(`📍 ${labels[id] || id} — resuming`, 'scrolling');
+    // Resume crawling from current position
+    setTimeout(()=>{
+      if(!isScrolling || paused) return;
+      phase = 'crawling';
+      crawl();
+    }, 300);
+  }
+
+  // Toggle button
+  btn.addEventListener('click', e=>{
+    e.preventDefault();
+    if(isScrolling) stopScroll(); else startScroll();
+  });
+
+  // Mouse move → pause (debounced 60ms so tiny jitter doesn't trigger)
+  let moveThrottle;
+  document.addEventListener('mousemove', ()=>{
+    if(!isScrolling || paused) return;
+    clearTimeout(moveThrottle);
+    moveThrottle = setTimeout(pauseScroll, 60);
+  });
+
+  // Touch → stop
+  document.addEventListener('touchstart', ()=>{ if(isScrolling) stopScroll(); }, { passive:true });
 })();
 
 // ===== CARD 3D TILT =====
