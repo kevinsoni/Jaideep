@@ -2452,6 +2452,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
 
 // ===== CARD 3D TILT =====
 document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{
+    // Disable transition only for transform during active tilt
+    card.style.transition = 'box-shadow 0.35s, border-color 0.35s, background 0.55s';
+  });
   card.addEventListener('mousemove',e=>{
     const r=card.getBoundingClientRect();
     const x=((e.clientX-r.left)/r.width -0.5)*18;
@@ -2459,6 +2463,8 @@ document.querySelectorAll('.tilt-card').forEach(card=>{
     card.style.transform=`perspective(800px) rotateX(${y}deg) rotateY(${x}deg) translateY(-10px) scale(1.02)`;
   });
   card.addEventListener('mouseleave',()=>{
+    // Re-enable transition for smooth return
+    card.style.transition = '';
     card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
   });
 });
