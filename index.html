@@ -380,20 +380,59 @@
     .triple-card.king { border-color:rgba(255,215,0,0.45); background:linear-gradient(180deg,rgba(255,215,0,0.07) 0%,var(--bg-card) 100%); }
     .triple-card.king::before { background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.16) 0%,transparent 60%); }
     .triple-card.king:hover { box-shadow:0 24px 70px var(--shadow-gold); border-color:var(--gold); }
-    .member-photo {
-      width:104px; height:104px; border-radius:50%; margin:0 auto 20px;
-      overflow:hidden; border:3px solid var(--border-col);
-      position:relative; background:var(--bg-card2);
-      display:flex; align-items:center; justify-content:center;
-      transition:border-color 0.3s, box-shadow 0.3s;
+    /* ---- Member photo ring ---- */
+    .member-photo-wrap {
+      position: relative; margin: 0 auto 24px;
+      width: 140px; height: 140px;
     }
-    .triple-card:hover .member-photo { border-color:var(--purple-soft); box-shadow:0 0 22px var(--shadow-purple); }
-    .triple-card.king .member-photo { border-color:rgba(255,215,0,0.75); }
-    .triple-card.king:hover .member-photo { box-shadow:0 0 22px var(--shadow-gold); }
-    .member-photo img { width:100%; height:100%; object-fit:cover; }
-    .member-initials { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--purple-soft); }
-    .triple-card.king .member-initials { color:var(--gold); }
-    .member-crown { position:absolute; top:-14px; left:50%; transform:translateX(-50%); font-size:1.4rem; }
+    /* spinning gradient ring */
+    .member-photo-wrap::before {
+      content: '';
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #8b2fc9, #ffd700, #6ee7f7, #b06fe8, #8b2fc9);
+      animation: spinRing 3s linear infinite;
+      z-index: 0;
+    }
+    .triple-card.king .member-photo-wrap::before {
+      background: conic-gradient(from 0deg, #ffd700, #f39c12, #fff8dc, #ffd700, #c9a227, #ffd700);
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    /* white gap between ring and photo */
+    .member-photo-wrap::after {
+      content: ''; position: absolute; inset: -1px;
+      border-radius: 50%; background: var(--bg-card);
+      z-index: 1;
+    }
+    .member-photo {
+      width: 140px; height: 140px; border-radius: 50%;
+      overflow: hidden; position: relative; z-index: 2;
+      background: var(--bg-card2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .member-photo img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
+    .triple-card:hover .member-photo img { transform: scale(1.08); }
+
+    /* crown sits above the ring */
+    .member-crown {
+      position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+      font-size: 1.5rem; z-index: 10; filter: drop-shadow(0 0 6px rgba(255,215,0,0.8));
+    }
+
+    /* card photo background */
+    .card-bg-photo {
+      position: absolute; inset: 0; border-radius: 24px; overflow: hidden; z-index: 0; pointer-events: none;
+    }
+    .card-bg-photo img { width:100%; height:100%; object-fit:cover; filter: blur(2px); opacity: 0.12; transition: opacity 0.4s; }
+    .triple-card:hover .card-bg-photo img { opacity: 0.2; }
+    .triple-card.king .card-bg-photo img { opacity: 0.15; }
+    .triple-card.king:hover .card-bg-photo img { opacity: 0.25; }
+
+    /* keep card content above bg */
+    .triple-card > *:not(.card-bg-photo) { position: relative; z-index: 1; }
+
     .member-name { font-family:'Cinzel',serif; font-size:1.35rem; font-weight:700; margin-bottom:4px; color:var(--text-primary); }
     .member-role { font-size:0.78rem; color:var(--text-muted); font-family:'Orbitron',sans-serif; letter-spacing:0.1em; margin-bottom:16px; }
     .triple-card.king .member-role { color:var(--gold); }
@@ -455,13 +494,13 @@
     #gym { background:linear-gradient(180deg,var(--bg-dark) 0%,var(--bg-deep) 100%); transition:background 0.55s; }
     .gym-layout { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
     .gym-visual {
-      aspect-ratio:1; border-radius:24px; overflow:hidden;
+      aspect-ratio:3/4; border-radius:24px; overflow:hidden;
       background:var(--bg-card); border:2px solid var(--border-col);
       position:relative; box-shadow:0 0 60px var(--shadow-purple);
       transition:border-color 0.35s, box-shadow 0.35s;
     }
     .gym-visual:hover { border-color:var(--gold); box-shadow:0 0 80px var(--shadow-gold); }
-    .gym-visual img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.5s; }
+    .gym-visual img { width:100%; height:100%; object-fit:cover; object-position:center center; transition:transform 0.5s; }
     .gym-visual:hover img { transform:scale(1.04); }
     .gym-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
     .gym-stat {
@@ -558,6 +597,46 @@
     }
     #scroll-top.visible { opacity:1; transform:translateY(0); }
     #scroll-top:hover { box-shadow:0 0 32px rgba(139,47,201,0.7); transform:translateY(-4px); }
+
+    /* ===== FLOATING BIRTHDAY COUNTDOWN ===== */
+    #bday-float {
+      position: fixed; bottom: 32px; left: 32px; z-index: 9000;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px 10px 14px;
+      background: var(--bg-glass2); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,215,0,0.35);
+      border-radius: 50px;
+      box-shadow: 0 0 28px rgba(255,215,0,0.18), 0 4px 20px rgba(0,0,0,0.4);
+      font-family: 'Orbitron', sans-serif;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      cursor: default;
+    }
+    #bday-float.visible { opacity: 1; transform: translateY(0); }
+    #bday-float.done { border-color: rgba(139,47,201,0.4); box-shadow: 0 0 28px rgba(139,47,201,0.2); }
+
+    .bf-cake {
+      font-size: 1.1rem; line-height: 1;
+      animation: cakeBounce 1.6s ease-in-out infinite;
+    }
+    @keyframes cakeBounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+
+    .bf-label {
+      font-size: 0.52rem; letter-spacing: 0.12em; color: var(--gold);
+      text-transform: uppercase; line-height: 1; margin-bottom: 3px;
+    }
+    .bf-time {
+      font-size: 0.82rem; font-weight: 700; color: var(--text-primary);
+      letter-spacing: 0.06em; line-height: 1;
+    }
+
+    @media(max-width:480px){
+      #bday-float { bottom: 20px; left: 16px; padding: 8px 14px 8px 11px; }
+      .bf-time { font-size: 0.7rem; }
+    }
 
     /* ===== VIBRANIUM LINE ===== */
     .vibranium-line { height:2px; margin:0 auto; border-radius:1px; background:linear-gradient(90deg,transparent,var(--vibranium),transparent); animation:shimmer 3s ease infinite; }
@@ -657,7 +736,7 @@
       .about-photo-box { aspect-ratio: 4/3; max-height: 320px; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .gym-layout { grid-template-columns: 1fr; gap: 40px; }
-      .gym-visual { aspect-ratio: 4/3; }
+      .gym-visual { aspect-ratio: 3/4; max-height: 420px; }
 
       /* Triple */
       .triple-cards { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
@@ -1380,6 +1459,15 @@
   </button>
 </nav>
 
+<!-- Floating Birthday Countdown -->
+<div id="bday-float" aria-live="polite">
+  <span class="bf-cake">🎂</span>
+  <div>
+    <div class="bf-label" id="bf-label">Birthday ends in</div>
+    <div class="bf-time" id="bf-time">--:--:--</div>
+  </div>
+</div>
+
 <!-- Scroll to Top -->
 <button id="scroll-top" aria-label="Scroll to top">
   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -1455,7 +1543,7 @@
     <div class="about-grid">
       <div class="reveal-left">
         <div class="about-photo-box">
-          <img src="photos/jaideep.jpg" alt="Jaideep — The King" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          <img src="photos/jaideep.jpg" alt="Jaideep — The King" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;" />
           <div class="about-photo-badge">
             <div class="badge-dot"></div>
             <div>
@@ -1472,7 +1560,7 @@
         <p class="section-desc">A designer by craft, a warrior by spirit. Jaideep brings colour and life to every screen he touches — and brings laughter and chaos to every trip we take together. Born to stand out, trained to stay humble, always ready for a gym session or a plate of sukhi bhel.</p>
         <div class="about-stats">
           <div class="stat-card reveal"><div class="stat-num">25</div><div class="stat-desc">Years of Pure Excellence</div></div>
-          <div class="stat-card reveal" style="transition-delay:0.1s"><div class="stat-num">7+</div><div class="stat-desc">Epic Trips Together</div></div>
+          <div class="stat-card reveal" style="transition-delay:0.1s"><div class="stat-num">∞</div><div class="stat-desc">Trips & Memories Together</div></div>
           <div class="stat-card reveal" style="transition-delay:0.2s"><div class="stat-num">∞</div><div class="stat-desc">Gym Sessions as Buddies</div></div>
           <div class="stat-card reveal" style="transition-delay:0.3s"><div class="stat-num">1</div><div class="stat-desc">Black Panther Superfan</div></div>
         </div>
@@ -1501,18 +1589,34 @@
     </div>
 
     <div class="triple-cards">
+
+      <!-- SHREYA -->
       <div class="triple-card reveal tilt-card" style="transition-delay:0.05s">
-        <div class="member-photo"><span class="member-initials">S</span></div>
+        <div class="card-bg-photo">
+          <img src="photos/navratri.jpg" alt="" aria-hidden="true" style="object-position:right center;" />
+        </div>
+        <div class="member-photo-wrap">
+          <div class="member-photo">
+            <img src="photos/navratri.jpg" alt="Shreya" style="object-position:82% top;" />
+          </div>
+        </div>
         <div class="member-name">Shreya</div>
         <div class="member-role">The Heart of the Trio</div>
         <div class="member-tags">
           <span class="tag">Best Friend</span><span class="tag">Adventure Seeker</span><span class="tag">The Glue</span>
         </div>
       </div>
+
+      <!-- JAIDEEP (KING) -->
       <div class="triple-card king reveal tilt-card" style="transition-delay:0.1s">
-        <div class="member-photo">
+        <div class="card-bg-photo">
+          <img src="photos/jaideep.jpg" alt="" aria-hidden="true" style="object-position:center 60%;" />
+        </div>
+        <div class="member-photo-wrap">
           <span class="member-crown" aria-hidden="true">👑</span>
-          <span class="member-initials">J</span>
+          <div class="member-photo">
+            <img src="photos/jaideep.jpg" alt="Jaideep" style="object-position:center 50%;" />
+          </div>
         </div>
         <div class="member-name" style="color:var(--gold)">Jaideep</div>
         <div class="member-role">The King · The Designer</div>
@@ -1520,14 +1624,24 @@
           <span class="tag">Birthday Boy 🎂</span><span class="tag">Black Panther Fan</span><span class="tag">Design Wizard</span><span class="tag">Gym King</span>
         </div>
       </div>
+
+      <!-- KEVIN -->
       <div class="triple-card reveal tilt-card" style="transition-delay:0.15s">
-        <div class="member-photo"><span class="member-initials">K</span></div>
+        <div class="card-bg-photo">
+          <img src="photos/kevinjaideep.jpg" alt="" aria-hidden="true" style="object-position:right center;" />
+        </div>
+        <div class="member-photo-wrap">
+          <div class="member-photo">
+            <img src="photos/kevinjaideep.jpg" alt="Kevin" style="object-position:right top;" />
+          </div>
+        </div>
         <div class="member-name">Kevin</div>
         <div class="member-role">Senior Developer · Brother</div>
         <div class="member-tags">
           <span class="tag">Brother</span><span class="tag">Heartbeat of the Trio</span><span class="tag">Code Wizard</span><span class="tag">Gym Buddy</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1587,20 +1701,20 @@
         <div class="trip-overlay"></div>
         <div class="trip-info"><div class="trip-name">Smrutivan — Bhuj</div><div class="trip-desc">Under the chrome rings, above the world</div></div>
       </div>
-      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo.jpg" data-caption="Bhujiyo Fort — Same height. Same outfit. Same energy." style="transition-delay:0.24s">
-        <img src="photos/bhujiyo.jpg" alt="Bhujiyo Fort" loading="lazy" style="object-position:center 20%;" />
+      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo.jpg" data-caption="Dhinodhar — The whole squad conquers the hill" style="transition-delay:0.24s">
+        <img src="photos/bhujiyo.jpg" alt="Dhinodhar squad" loading="lazy" style="object-position:center 20%;" />
         <div class="trip-overlay"></div>
-        <div class="trip-info"><div class="trip-name">Bhujiyo Fort</div><div class="trip-desc">Same height. Same outfit. Same energy.</div></div>
+        <div class="trip-info"><div class="trip-name">Dhinodhar</div><div class="trip-desc">The whole squad conquers the hill</div></div>
       </div>
-      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo with amee.jpeg" data-caption="Bhujiyo Fort with Amee — The whole crew at the top" style="transition-delay:0.25s">
+      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo with amee.jpeg" data-caption="Bhujiyo Hill — Views from the top" style="transition-delay:0.25s">
         <img src="photos/bhujiyo with amee.jpeg" alt="Bhujiyo Fort with Amee" loading="lazy" style="object-position:center 30%;" />
         <div class="trip-overlay"></div>
-        <div class="trip-info"><div class="trip-name">Bhujiyo with Amee</div><div class="trip-desc">The whole crew at the top</div></div>
+        <div class="trip-info"><div class="trip-name">Bhujiyo Hill</div><div class="trip-desc">Views from the top</div></div>
       </div>
-      <div class="trip-card reveal" data-src="photos/girnar.jpg" data-caption="Girnar — Two kings, one green wall" style="transition-delay:0.26s">
-        <img src="photos/girnar.jpg" alt="Girnar" loading="lazy" style="object-position:center 20%;" />
+      <div class="trip-card reveal" data-src="photos/girnar.jpg" data-caption="Dhinodhar — Brothers on the rocks" style="transition-delay:0.26s">
+        <img src="photos/girnar.jpg" alt="Dhinodhar brothers" loading="lazy" style="object-position:center 20%;" />
         <div class="trip-overlay"></div>
-        <div class="trip-info"><div class="trip-name">Girnar</div><div class="trip-desc">Two kings, one green wall</div></div>
+        <div class="trip-info"><div class="trip-name">Dhinodhar</div><div class="trip-desc">Brothers on the rocks</div></div>
       </div>
       <div class="trip-card g-tall reveal" data-src="photos/dhinodhar.jpg" data-caption="Dhinodhar — Hilltop views &amp; matching fits" style="transition-delay:0.28s">
         <img src="photos/dhinodhar.jpg" alt="Dhinodhar" loading="lazy" style="object-position:center 25%;" />
@@ -1796,7 +1910,7 @@
     <div class="withmaa-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
       <div class="reveal-left">
         <div class="withmaa-photo" style="border-radius:24px;overflow:hidden;border:2px solid var(--border-gold);box-shadow:0 0 80px var(--shadow-gold);position:relative;aspect-ratio:3/4;">
-          <img src="photos/withmaa.jpg" alt="Jaideep with Maa and Kevin" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="lazy" />
+          <img src="photos/withmaa.jpg" alt="Jaideep with Maa and Kevin" style="width:100%;height:100%;object-fit:cover;object-position:center 38%;" loading="lazy" />
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,4,10,0.75) 0%,transparent 60%);"></div>
           <div style="position:absolute;bottom:20px;left:20px;">
             <span style="font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;">Where it all begins</span>
@@ -2073,6 +2187,56 @@ window.addEventListener('scroll',()=>{
   scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
 },{passive:true});
 scrollTopBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ===== FLOATING BIRTHDAY COUNTDOWN =====
+(function(){
+  const floatEl  = document.getElementById('bday-float');
+  const timeEl   = document.getElementById('bf-time');
+  const labelEl  = document.getElementById('bf-label');
+  if(!floatEl) return;
+
+  const BDAY_START = new Date(2026, 4, 13, 0, 0, 0);   // May 13 midnight start
+  const BDAY_END   = new Date(2026, 4, 14, 0, 0, 0);   // May 14 midnight (end of bday)
+  const NEXT_BDAY  = new Date(2027, 4, 13, 0, 0, 0);   // Next year
+
+  function fmt2(n){ return String(n).padStart(2,'0'); }
+
+  function tickFloat(){
+    const now = new Date();
+
+    if(now >= BDAY_START && now < BDAY_END){
+      // It's the birthday today — count down remaining hours
+      const diff = BDAY_END - now;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      labelEl.textContent = 'Birthday ends in';
+      timeEl.textContent  = `${fmt2(h)}:${fmt2(m)}:${fmt2(s)}`;
+      floatEl.classList.add('visible');
+      floatEl.classList.remove('done');
+    } else if(now >= BDAY_END){
+      // Birthday is over — show next birthday countdown
+      const diff = NEXT_BDAY - now;
+      const d = Math.floor(diff / 86400000);
+      labelEl.textContent = 'Next birthday in';
+      timeEl.textContent  = `${d} days`;
+      floatEl.classList.add('visible','done');
+    } else {
+      // Before birthday — count down to it
+      const diff = BDAY_START - now;
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      labelEl.textContent = 'Birthday in';
+      timeEl.textContent  = `${d}d ${fmt2(h)}:${fmt2(m)}:${fmt2(s)}`;
+      floatEl.classList.add('visible');
+    }
+  }
+
+  // Show after short delay so it doesn't compete with page load
+  setTimeout(()=>{ tickFloat(); setInterval(tickFloat, 1000); }, 1200);
+})();
 
 // ===== ACTIVE NAV =====
 const sections = document.querySelectorAll('section[id]');
