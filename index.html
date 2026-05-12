@@ -1035,6 +1035,53 @@
 </head>
 <body>
 
+<!-- ==================== MODE SELECTOR ==================== -->
+<div id="mode-selector">
+  <div class="ms-orb ms-orb-1"></div>
+  <div class="ms-orb ms-orb-2"></div>
+  <div class="ms-inner">
+    <span class="ms-eyebrow"><span class="ms-eyebrow-dot"></span>Welcome, Your Highness</span>
+    <h2 class="ms-title">Choose Your <span>Experience</span></h2>
+    <p class="ms-sub">Pick a vibe before entering the kingdom</p>
+    <div class="ms-cards">
+      <!-- Dark card -->
+      <div class="ms-card ms-dark" data-pick="dark">
+        <div class="ms-card-content">
+          <div class="ms-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b06fe8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </div>
+          <div class="ms-mode-name">Dark Mode</div>
+          <div class="ms-mode-desc">Immerse yourself in the depths of Wakanda. Deep blacks, vibranium glow, gold accents — the true Black Panther experience.</div>
+          <div class="ms-preview">
+            <div class="ms-preview-bar" style="background:#8b2fc9;opacity:0.8"></div>
+            <div class="ms-preview-bar" style="background:#ffd700;opacity:0.7"></div>
+            <div class="ms-preview-bar" style="background:#6ee7f7;opacity:0.6"></div>
+            <div class="ms-preview-bar" style="background:#b06fe8;opacity:0.5"></div>
+          </div>
+          <div class="ms-pick-btn">Enter the Dark</div>
+        </div>
+      </div>
+      <!-- Light card -->
+      <div class="ms-card ms-light" data-pick="light">
+        <div class="ms-card-content">
+          <div class="ms-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8b2fc9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </div>
+          <div class="ms-mode-name">Light Mode</div>
+          <div class="ms-mode-desc">Bright and elegant — a softer side of the kingdom. Clean lavenders and warm golds for a regal daytime celebration.</div>
+          <div class="ms-preview">
+            <div class="ms-preview-bar" style="background:#8b2fc9;opacity:0.7"></div>
+            <div class="ms-preview-bar" style="background:#a86400;opacity:0.6"></div>
+            <div class="ms-preview-bar" style="background:#3ab5d0;opacity:0.5"></div>
+            <div class="ms-preview-bar" style="background:#b06fe8;opacity:0.45"></div>
+          </div>
+          <div class="ms-pick-btn">Enter the Light</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== BIRTHDAY GATE ==================== -->
 <div id="birthday-gate">
   <canvas id="gate-canvas"></canvas>
@@ -1300,7 +1347,7 @@
         <div class="member-name">Shreya</div>
         <div class="member-role">The Heart of the Trio</div>
         <div class="member-tags">
-          <span class="tag">Best Friend</span><span class="tag">Gym Buddy</span><span class="tag">Adventure Seeker</span>
+          <span class="tag">Best Friend</span><span class="tag">Adventure Seeker</span><span class="tag">The Glue</span>
         </div>
       </div>
       <div class="triple-card king reveal tilt-card" style="transition-delay:0.1s">
@@ -1317,9 +1364,9 @@
       <div class="triple-card reveal tilt-card" style="transition-delay:0.15s">
         <div class="member-photo"><span class="member-initials">K</span></div>
         <div class="member-name">Kevin</div>
-        <div class="member-role">Senior Developer</div>
+        <div class="member-role">Senior Developer · Brother</div>
         <div class="member-tags">
-          <span class="tag">Best Friend</span><span class="tag">Code Wizard</span><span class="tag">Gym Buddy</span>
+          <span class="tag">Brother</span><span class="tag">Heartbeat of the Trio</span><span class="tag">Code Wizard</span><span class="tag">Gym Buddy</span>
         </div>
       </div>
     </div>
@@ -1385,6 +1432,11 @@
         <img src="photos/bhujiyo.jpg" alt="Bhujiyo Fort" loading="lazy" style="object-position:center 20%;" />
         <div class="trip-overlay"></div>
         <div class="trip-info"><div class="trip-name">Bhujiyo Fort</div><div class="trip-desc">Same height. Same outfit. Same energy.</div></div>
+      </div>
+      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo with amee.jpeg" data-caption="Bhujiyo Fort with Amee — The whole crew at the top" style="transition-delay:0.25s">
+        <img src="photos/bhujiyo with amee.jpeg" alt="Bhujiyo Fort with Amee" loading="lazy" style="object-position:center 30%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Bhujiyo with Amee</div><div class="trip-desc">The whole crew at the top</div></div>
       </div>
       <div class="trip-card reveal" data-src="photos/girnar.jpg" data-caption="Girnar — Two kings, one green wall" style="transition-delay:0.26s">
         <img src="photos/girnar.jpg" alt="Girnar" loading="lazy" style="object-position:center 20%;" />
@@ -1974,6 +2026,43 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
     // Restore scroll when gate is gone
     gate.addEventListener('animationend', ()=>{ document.body.style.overflow=''; }, { once: true });
   }
+})();
+
+// ===== MODE SELECTOR =====
+(function(){
+  const ms = document.getElementById('mode-selector');
+  if(!ms) return;
+
+  const hasTheme = localStorage.getItem('theme');
+  if(hasTheme){
+    // Already picked before — apply saved theme and skip selector
+    document.documentElement.setAttribute('data-theme', hasTheme);
+    ms.classList.add('gone');
+    return;
+  }
+
+  // No saved theme: show selector after a short delay
+  // (gate may also be open — selector sits above gate at z:190000)
+  setTimeout(()=>{ ms.classList.add('visible'); }, 300);
+
+  ms.querySelectorAll('.ms-card').forEach(card=>{
+    card.addEventListener('click', function(){
+      const pick = this.dataset.pick; // 'dark' or 'light'
+
+      // Apply theme immediately
+      document.documentElement.setAttribute('data-theme', pick);
+      localStorage.setItem('theme', pick);
+
+      // Expand the chosen card
+      this.classList.add('expanding');
+
+      // Fade the whole selector out a bit after expansion starts
+      setTimeout(()=>{
+        ms.classList.add('fading');
+        setTimeout(()=>{ ms.classList.add('gone'); ms.classList.remove('visible','fading'); }, 550);
+      }, 350);
+    });
+  });
 })();
 
 // ===== CARD 3D TILT =====
