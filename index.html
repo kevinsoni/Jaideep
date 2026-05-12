@@ -90,6 +90,50 @@
       transition: background-color 0.55s ease, color 0.55s ease;
     }
 
+    /* Light theme section backgrounds */
+    [data-theme="light"] #about,
+    [data-theme="light"] #gallery,
+    [data-theme="light"] #office,
+    [data-theme="light"] #message,
+    [data-theme="light"] footer { background: rgba(246,242,255,0.82); }
+    [data-theme="light"] #triple,
+    [data-theme="light"] #funfacts,
+    [data-theme="light"] #withmaa { background: rgba(237,229,255,0.80); }
+    [data-theme="light"] #gym { background: linear-gradient(180deg, rgba(237,229,255,0.80) 0%, rgba(246,242,255,0.82) 100%); }
+    [data-theme="light"] #bp-bg svg { filter: drop-shadow(0 0 60px rgba(139,47,201,0.2)); }
+
+    /* ===== BLACK PANTHER BACKGROUND ===== */
+    #bp-bg {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #bp-bg svg {
+      width: min(90vw, 90vh); height: min(90vw, 90vh);
+      opacity: 0.045;
+      filter: drop-shadow(0 0 60px rgba(139,47,201,0.4));
+      animation: bpFloat 12s ease-in-out infinite;
+    }
+    [data-theme="light"] #bp-bg svg { opacity: 0.035; }
+    @keyframes bpFloat {
+      0%,100% { transform: scale(1) translateY(0); }
+      50%      { transform: scale(1.04) translateY(-12px); }
+    }
+
+    /* ===== GLASSMORPHISM GLOBAL ===== */
+    .glass {
+      background: rgba(14,14,28,0.45) !important;
+      backdrop-filter: blur(20px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+      border: 1px solid rgba(255,255,255,0.07) !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    }
+    [data-theme="light"] .glass {
+      background: rgba(255,255,255,0.55) !important;
+      border: 1px solid rgba(255,255,255,0.65) !important;
+      box-shadow: 0 8px 32px rgba(139,47,201,0.1), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+    }
+
     /* ===== THEME TRANSITION OVERLAY ===== */
     #theme-ripple {
       position: fixed;
@@ -335,7 +379,7 @@
     .scroll-line { width:1px; height:50px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 1.5s ease infinite; }
 
     /* ===== ABOUT ===== */
-    #about { background: var(--bg-deep); transition: background 0.55s; }
+    #about { background: rgba(4,4,10,0.82); transition: background 0.55s; }
     .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
     .about-photo-box {
       aspect-ratio:3/4; border-radius:24px; overflow:hidden;
@@ -358,8 +402,14 @@
     .badge-sub { font-size:0.65rem; color:var(--text-muted); }
     .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
     .stat-card {
-      background:var(--bg-card); border:1px solid var(--border-col); border-radius:16px; padding:22px;
+      background:rgba(14,14,28,0.48); border:1px solid rgba(139,47,201,0.32); border-radius:16px; padding:22px;
+      backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+      box-shadow:0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
       transition:border-color 0.3s, box-shadow 0.3s, background 0.55s, transform 0.3s; cursor:default;
+    }
+    [data-theme="light"] .stat-card {
+      background:rgba(255,255,255,0.58); border:1px solid rgba(139,47,201,0.2);
+      box-shadow:0 4px 24px rgba(139,47,201,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
     }
     .stat-card:hover { border-color:var(--gold); box-shadow:0 0 24px var(--shadow-gold); transform:translateY(-3px); }
     .stat-num { font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:700; color:var(--gold); line-height:1; }
@@ -426,19 +476,25 @@
     }
 
     /* ===== TRIPLE TROUBLE ===== */
-    #triple { background:var(--bg-dark); text-align:center; transition:background 0.55s; }
+    #triple { background:rgba(8,8,15,0.80); text-align:center; transition:background 0.55s; }
     .triple-badge { display:inline-block; font-family:'Cinzel',serif; font-size:2.5rem; font-weight:900; background:linear-gradient(135deg,var(--gold) 0%,var(--purple-soft) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
     .triple-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:60px; }
     .triple-card {
-      background:var(--bg-card); border:1px solid var(--border-col);
+      background:rgba(14,14,28,0.52); border:1px solid rgba(139,47,201,0.32);
       border-radius:24px; padding:36px 24px; position:relative; overflow:hidden;
+      backdrop-filter:blur(22px) saturate(160%); -webkit-backdrop-filter:blur(22px) saturate(160%);
+      box-shadow:0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
       transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s, border-color 0.35s, background 0.55s;
       cursor:default; will-change:transform;
+    }
+    [data-theme="light"] .triple-card {
+      background:rgba(255,255,255,0.60); border:1px solid rgba(139,47,201,0.22);
+      box-shadow:0 8px 40px rgba(139,47,201,0.1), inset 0 1px 0 rgba(255,255,255,0.95);
     }
     .triple-card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%,rgba(139,47,201,0.14) 0%,transparent 60%); }
     .triple-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--card-shine) 0%,transparent 55%); pointer-events:none; }
     .triple-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 24px 70px var(--shadow-purple); border-color:var(--purple-soft); }
-    .triple-card.king { border-color:rgba(255,215,0,0.45); background:linear-gradient(180deg,rgba(255,215,0,0.07) 0%,var(--bg-card) 100%); }
+    .triple-card.king { border-color:rgba(255,215,0,0.45); background:linear-gradient(180deg,rgba(255,215,0,0.1) 0%,rgba(14,14,28,0.52) 100%); }
     .triple-card.king::before { background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.16) 0%,transparent 60%); }
     .triple-card.king:hover { box-shadow:0 24px 70px var(--shadow-gold); border-color:var(--gold); }
     /* ---- Member photo ring ---- */
@@ -501,8 +557,17 @@
     .tag { font-size:0.7rem; padding:4px 12px; border-radius:20px; background:rgba(139,47,201,0.15); border:1px solid var(--border-col); color:var(--purple-soft); font-weight:500; }
     .triple-card.king .tag { background:rgba(255,215,0,0.1); border-color:var(--border-gold); color:var(--gold); }
 
+    /* Marvel character tags */
+    .tag-marvel {
+      font-size:0.7rem; padding:5px 13px; border-radius:20px; font-weight:700;
+      display:inline-flex; align-items:center; gap:5px; letter-spacing:0.03em;
+    }
+    .tag-ironman  { background:rgba(198,40,40,0.18); border:1px solid rgba(255,80,80,0.5); color:#ff6b6b; }
+    .tag-spider   { background:rgba(198,40,40,0.15); border:1px solid rgba(100,140,255,0.5); color:#7eb3ff; }
+    .tag-panther  { background:rgba(139,47,201,0.2);  border:1px solid rgba(176,111,232,0.6); color:#e0c4ff; }
+
     /* ===== GALLERY ===== */
-    #gallery { background:var(--bg-deep); transition:background 0.55s; }
+    #gallery { background:rgba(4,4,10,0.82); transition:background 0.55s; }
     .gallery-masonry { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:260px; gap:16px; margin-top:48px; }
     .g-wide { grid-column:span 2; }
     .g-tall { grid-row:span 2; }
@@ -552,7 +617,7 @@
     #lb-prev:hover, #lb-next:hover { background:rgba(139,47,201,0.4); }
 
     /* ===== GYM ===== */
-    #gym { background:linear-gradient(180deg,var(--bg-dark) 0%,var(--bg-deep) 100%); transition:background 0.55s; }
+    #gym { background:linear-gradient(180deg,rgba(8,8,15,0.80) 0%,rgba(4,4,10,0.82) 100%); transition:background 0.55s; }
     .gym-layout { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
     .gym-visual {
       aspect-ratio:3/4; border-radius:24px; overflow:hidden;
@@ -565,9 +630,15 @@
     .gym-visual:hover img { transform:scale(1.04); }
     .gym-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
     .gym-stat {
-      background:var(--bg-card); border:1px solid var(--border-col);
+      background:rgba(14,14,28,0.48); border:1px solid rgba(139,47,201,0.28);
       border-radius:14px; padding:20px; text-align:center;
+      backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+      box-shadow:0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
       transition:border-color 0.3s, box-shadow 0.3s, background 0.55s, transform 0.3s;
+    }
+    [data-theme="light"] .gym-stat {
+      background:rgba(255,255,255,0.58); border:1px solid rgba(139,47,201,0.18);
+      box-shadow:0 4px 20px rgba(139,47,201,0.09), inset 0 1px 0 rgba(255,255,255,0.9);
     }
     .gym-stat:hover { border-color:var(--gold); box-shadow:0 0 20px var(--shadow-gold); transform:translateY(-3px); }
     .gym-stat-icon { margin-bottom:8px; display:block; }
@@ -575,7 +646,7 @@
     .gym-stat-label { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
 
     /* ===== OFFICE ===== */
-    #office { background:var(--bg-deep); transition:background 0.55s; }
+    #office { background:rgba(4,4,10,0.82); transition:background 0.55s; }
     .office-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
     .o-card {
       border-radius:18px; overflow:hidden; aspect-ratio:3/4;
@@ -592,13 +663,19 @@
     .o-card-sub { font-size:0.72rem; color:rgba(255,255,255,0.55); margin-top:2px; }
 
     /* ===== FUN FACTS ===== */
-    #funfacts { background:var(--bg-dark); text-align:center; transition:background 0.55s; }
+    #funfacts { background:rgba(8,8,15,0.80); text-align:center; transition:background 0.55s; }
     .facts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
     .fact-card {
-      background:var(--bg-card); border:1px solid var(--border-col);
+      background:rgba(14,14,28,0.50); border:1px solid rgba(139,47,201,0.28);
       border-radius:20px; padding:32px 24px; position:relative; overflow:hidden;
+      backdrop-filter:blur(20px) saturate(155%); -webkit-backdrop-filter:blur(20px) saturate(155%);
+      box-shadow:0 6px 30px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.05);
       transition:transform 0.32s cubic-bezier(.22,1,.36,1), border-color 0.3s, box-shadow 0.3s, background 0.55s;
       cursor:default;
+    }
+    [data-theme="light"] .fact-card {
+      background:rgba(255,255,255,0.60); border:1px solid rgba(139,47,201,0.2);
+      box-shadow:0 6px 30px rgba(139,47,201,0.09), inset 0 1px 0 rgba(255,255,255,0.95);
     }
     .fact-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--card-shine) 0%,transparent 55%); pointer-events:none; }
     .fact-card:hover { transform:translateY(-8px); border-color:var(--gold); box-shadow:0 16px 50px var(--shadow-gold); }
@@ -614,17 +691,23 @@
     .fact-body { font-size:0.9rem; color:var(--text-muted); line-height:1.65; }
 
     /* ===== WITH MAA ===== */
-    #withmaa { background:var(--bg-dark); padding:80px 24px; position:relative; z-index:1; transition:background 0.55s; }
+    #withmaa { background:rgba(8,8,15,0.80); padding:80px 24px; position:relative; z-index:1; transition:background 0.55s; }
 
     /* ===== MESSAGE ===== */
-    #message { background:var(--bg-deep); text-align:center; transition:background 0.55s; }
+    #message { background:rgba(4,4,10,0.82); text-align:center; transition:background 0.55s; }
     .message-card {
-      background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-card2) 100%);
-      border:1px solid var(--border-gold); border-radius:28px; padding:60px 48px;
+      background:linear-gradient(135deg,rgba(14,14,28,0.55) 0%,rgba(18,18,42,0.55) 100%);
+      border:1px solid rgba(255,215,0,0.35); border-radius:28px; padding:60px 48px;
       max-width:780px; margin:0 auto;
-      box-shadow:0 0 80px var(--shadow-purple), inset 0 0 60px rgba(255,215,0,0.02);
+      backdrop-filter:blur(24px) saturate(160%); -webkit-backdrop-filter:blur(24px) saturate(160%);
+      box-shadow:0 0 80px var(--shadow-purple), 0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07);
       position:relative; overflow:hidden;
       transition:background 0.55s, border-color 0.55s, box-shadow 0.55s;
+    }
+    [data-theme="light"] .message-card {
+      background:linear-gradient(135deg,rgba(255,255,255,0.65) 0%,rgba(243,237,255,0.65) 100%);
+      border:1px solid rgba(168,100,0,0.3);
+      box-shadow:0 0 80px rgba(139,47,201,0.1), 0 8px 40px rgba(139,47,201,0.08), inset 0 1px 0 rgba(255,255,255,0.95);
     }
     .message-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(139,47,201,0.14) 0%,transparent 70%); }
     .message-quote { font-family:'Cinzel',serif; font-size:clamp(1.4rem,3vw,2.2rem); font-weight:700; line-height:1.45; color:var(--text-primary); position:relative; z-index:1; margin-bottom:28px; }
@@ -637,8 +720,9 @@
 
     /* ===== FOOTER ===== */
     footer {
-      background:var(--bg-deep); border-top:1px solid var(--section-sep);
+      background:rgba(4,4,10,0.86); border-top:1px solid var(--section-sep);
       text-align:center; padding:52px 24px; position:relative; z-index:1;
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
       transition:background 0.55s, border-color 0.55s;
     }
     .footer-logo { font-family:'Cinzel',serif; font-size:2rem; font-weight:900; letter-spacing:0.1em; background:linear-gradient(135deg,var(--gold),var(--purple-soft)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
@@ -706,9 +790,10 @@
     #ai-panel {
       position: fixed; top: 0; right: 0; bottom: 0; z-index: 9200;
       width: min(420px, 92vw);
-      background: var(--bg-card);
-      border-left: 1px solid var(--border-col);
-      box-shadow: -20px 0 80px rgba(90,20,140,0.4);
+      background: rgba(10,10,20,0.72);
+      backdrop-filter: blur(28px) saturate(170%); -webkit-backdrop-filter: blur(28px) saturate(170%);
+      border-left: 1px solid rgba(139,47,201,0.35);
+      box-shadow: -20px 0 80px rgba(90,20,140,0.5), inset 1px 0 0 rgba(255,255,255,0.05);
       transform: translateX(100%);
       transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
       display: flex; flex-direction: column;
@@ -1575,6 +1660,55 @@
 </head>
 <body>
 
+<!-- ==================== BLACK PANTHER BG ==================== -->
+<div id="bp-bg" aria-hidden="true">
+  <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- Left ear -->
+    <path d="M108 118 L52 18 L162 88 Z" fill="#8b2fc9"/>
+    <!-- Right ear -->
+    <path d="M292 118 L348 18 L238 88 Z" fill="#8b2fc9"/>
+    <!-- Ear inner detail -->
+    <path d="M108 112 L70 35 L150 88 Z" fill="#5b1a8a" opacity="0.6"/>
+    <path d="M292 112 L330 35 L250 88 Z" fill="#5b1a8a" opacity="0.6"/>
+    <!-- Main head silhouette -->
+    <path d="M200,72 C136,72 85,130 73,202 C61,274 78,344 116,393 C144,428 170,450 200,452 C230,450 256,428 284,393 C322,344 339,274 327,202 C315,130 264,72 200,72 Z" fill="#8b2fc9"/>
+    <!-- Forehead ridge -->
+    <path d="M158,88 C175,80 225,80 242,88 C230,95 170,95 158,88 Z" fill="#b06fe8" opacity="0.5"/>
+    <!-- Face panel (darker inner face) -->
+    <path d="M200,110 C155,110 118,155 112,210 C106,265 122,320 148,355 C162,374 180,386 200,388 C220,386 238,374 252,355 C278,320 294,265 288,210 C282,155 245,110 200,110 Z" fill="#2a0a3e" opacity="0.7"/>
+    <!-- Left eye slit -->
+    <path d="M128,200 L170,186 L178,212 L134,226 Z" fill="#04040a"/>
+    <path d="M130,201 L168,189 L176,210 L136,222 Z" fill="#6ee7f7" opacity="0.15"/>
+    <!-- Right eye slit -->
+    <path d="M272,200 L230,186 L222,212 L266,226 Z" fill="#04040a"/>
+    <path d="M270,201 L232,189 L224,210 L264,222 Z" fill="#6ee7f7" opacity="0.15"/>
+    <!-- Nose -->
+    <path d="M192,230 L208,230 L214,262 L206,274 L194,274 L186,262 Z" fill="#04040a" opacity="0.8"/>
+    <!-- Mouth panel -->
+    <path d="M162,300 C175,322 200,328 200,328 C200,328 225,322 238,300 L230,283 C220,296 180,296 170,283 Z" fill="#04040a" opacity="0.6"/>
+    <!-- Chin detail -->
+    <path d="M175,380 L200,395 L225,380 L220,360 L200,368 L180,360 Z" fill="#5b1a8a" opacity="0.7"/>
+    <!-- Collar / necklace base -->
+    <path d="M140,428 C155,445 200,455 200,455 C200,455 245,445 260,428 L252,408 C238,425 162,425 148,408 Z" fill="#8b2fc9" opacity="0.9"/>
+    <!-- Collar beads -->
+    <circle cx="170" cy="438" r="4" fill="#ffd700" opacity="0.7"/>
+    <circle cx="185" cy="444" r="4" fill="#ffd700" opacity="0.7"/>
+    <circle cx="200" cy="447" r="4" fill="#ffd700" opacity="0.9"/>
+    <circle cx="215" cy="444" r="4" fill="#ffd700" opacity="0.7"/>
+    <circle cx="230" cy="438" r="4" fill="#ffd700" opacity="0.7"/>
+    <!-- Vibranium lines (symmetrical face detail) -->
+    <line x1="200" y1="110" x2="200" y2="385" stroke="#b06fe8" stroke-width="0.6" opacity="0.25"/>
+    <path d="M160,145 C152,200 152,290 158,345" stroke="#b06fe8" stroke-width="0.6" opacity="0.2" stroke-dasharray="4,6"/>
+    <path d="M240,145 C248,200 248,290 242,345" stroke="#b06fe8" stroke-width="0.6" opacity="0.2" stroke-dasharray="4,6"/>
+    <!-- Brow lines -->
+    <path d="M122,175 C140,165 168,162 178,166" stroke="#b06fe8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+    <path d="M278,175 C260,165 232,162 222,166" stroke="#b06fe8" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+    <!-- Gold accent trim on ears -->
+    <path d="M88,80 L60,26 L108,68" stroke="#ffd700" stroke-width="1" opacity="0.4" fill="none" stroke-linecap="round"/>
+    <path d="M312,80 L340,26 L292,68" stroke="#ffd700" stroke-width="1" opacity="0.4" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
 <!-- ==================== MOBILE WARNING ==================== -->
 <div id="mobile-warn">
   <div class="mw-orb1"></div>
@@ -2021,7 +2155,6 @@
       <span class="age-label">Years<br/>of Reign</span>
     </div>
 
-    <p class="hero-date">13 · 05 · 2001 &rarr; 13 · 05 · 2026</p>
     <a href="#about" class="hero-cta" id="auto-scroll-btn" style="display:inline-flex;align-items:center;gap:14px;padding:14px 28px 14px 20px;">
       <!-- Play circle -->
       <span id="cta-icon" style="width:42px;height:42px;border-radius:50%;background:rgba(255,215,0,0.15);border:2px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s,background 0.3s;">
@@ -2136,6 +2269,7 @@
         <div class="member-role">The Heart of the Trio</div>
         <div class="member-tags">
           <span class="tag">Best Friend</span><span class="tag">Adventure Seeker</span><span class="tag">The Glue</span>
+          <span class="tag-marvel tag-spider">🕷️ Spider-Man</span>
         </div>
       </div>
 
@@ -2153,7 +2287,8 @@
         <div class="member-name" style="color:var(--gold)">Jaideep</div>
         <div class="member-role">The King · The Designer</div>
         <div class="member-tags">
-          <span class="tag">Birthday Boy 🎂</span><span class="tag">Black Panther Fan</span><span class="tag">Design Wizard</span><span class="tag">Gym King</span>
+          <span class="tag">Birthday Boy 🎂</span><span class="tag">Design Wizard</span><span class="tag">Gym King</span>
+          <span class="tag-marvel tag-panther">🐾 Black Panther</span>
         </div>
       </div>
 
@@ -2171,6 +2306,7 @@
         <div class="member-role">Senior Developer · Brother</div>
         <div class="member-tags">
           <span class="tag">Brother</span><span class="tag">Heartbeat of the Trio</span><span class="tag">Code Wizard</span><span class="tag">Gym Buddy</span>
+          <span class="tag-marvel tag-ironman">🦾 Iron Man</span>
         </div>
       </div>
 
@@ -2373,20 +2509,10 @@
         <div class="o-card-overlay"></div>
         <div class="o-card-label"><div class="o-card-title" style="color:var(--gold)">Traditional Day</div><div class="o-card-sub">Diwali at AeonX</div></div>
       </div>
-      <div class="o-card reveal" style="transition-delay:0.35s" data-src="photos/officelift.jpg" data-caption="Lift Selfie — Going up. Always.">
-        <img src="photos/officelift.jpg" alt="Lift selfie" loading="lazy" style="object-position:center top;" />
-        <div class="o-card-overlay"></div>
-        <div class="o-card-label"><div class="o-card-title">Lift Selfie</div><div class="o-card-sub">Going up. Always.</div></div>
-      </div>
-      <div class="o-card reveal" style="transition-delay:0.38s;border-color:rgba(110,231,247,0.25);" data-src="photos/devfest.jpg" data-caption="AeonX Dev Fest 2025 — #BuildWithAeonX">
+      <div class="o-card reveal" style="transition-delay:0.35s;border-color:rgba(110,231,247,0.25);" data-src="photos/devfest.jpg" data-caption="AeonX Dev Fest 2025 — #BuildWithAeonX">
         <img src="photos/devfest.jpg" alt="DevFest 2025" loading="lazy" style="object-position:center 15%;" />
         <div class="o-card-overlay"></div>
         <div class="o-card-label"><div class="o-card-title" style="color:var(--vibranium)">AeonX Dev Fest 2025</div><div class="o-card-sub">#BuildWithAeonX</div></div>
-      </div>
-      <div class="o-card reveal" style="transition-delay:0.4s" data-src="photos/dhinodhar2.jpg" data-caption="Dhinodhar Trek — The whole squad on the hill">
-        <img src="photos/dhinodhar2.jpg" alt="Dhinodhar trek" loading="lazy" style="object-position:center 30%;" />
-        <div class="o-card-overlay"></div>
-        <div class="o-card-label"><div class="o-card-title" style="color:var(--purple-soft)">Dhinodhar Trek</div><div class="o-card-sub">The whole squad on the hill</div></div>
       </div>
     </div>
   </div>
@@ -2447,33 +2573,6 @@
   </div>
 </section>
 
-<!-- ==================== WITH MAA ==================== -->
-<section id="withmaa">
-  <div class="container">
-    <div class="withmaa-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-      <div class="reveal-left">
-        <div class="withmaa-photo" style="border-radius:24px;overflow:hidden;border:2px solid var(--border-gold);box-shadow:0 0 80px var(--shadow-gold);position:relative;aspect-ratio:3/4;">
-          <img src="photos/withmaa.jpg" alt="Jaideep with Maa and Kevin" style="width:100%;height:100%;object-fit:cover;object-position:center 38%;" loading="lazy" />
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,4,10,0.75) 0%,transparent 60%);"></div>
-          <div style="position:absolute;bottom:20px;left:20px;">
-            <span style="font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;">Where it all begins</span>
-          </div>
-        </div>
-      </div>
-      <div class="reveal-right">
-        <span class="section-label">The Real Foundation</span>
-        <h2 class="section-title">With <span>Maa</span></h2>
-        <div class="divider"></div>
-        <p class="section-desc">Behind every king is a queen who raised him right. Jaideep's warmth, his kindness, his grounded nature — that all comes from home. From Maa. And the fact that Kevin is in this photo too just says everything about how deep this friendship runs — he's family too.</p>
-        <div style="margin-top:28px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:background 0.55s,border-color 0.55s;">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulseDot 1.5s ease infinite;"></div>
-          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.6;font-style:italic;">"A good person at home is a great person everywhere."</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== MESSAGE ==================== -->
 <section id="message">
   <div class="container">
@@ -2504,10 +2603,68 @@
 
 <!-- ==================== FOOTER ==================== -->
 <footer>
-  <div class="footer-logo">Jaideep</div>
-  <div class="footer-wakanda">Wakanda Forever · Triple Trouble · 2026</div>
-  <div class="vibranium-line" style="width:200px;margin:20px auto;" aria-hidden="true"></div>
-  <p class="footer-copy">Made with love by <span>Kevin</span> for the greatest designer, gym buddy &amp; best friend.<br/>Happy 25th Birthday — the best is yet to come.</p>
+  <div class="container" style="max-width:900px;">
+
+    <!-- Black Panther claw divider -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:52px;">
+      <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,var(--border-col));"></div>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <path d="M18 4 L22 16 L18 14 L14 16 Z" fill="var(--purple)" opacity="0.9"/>
+        <path d="M12 6 L14 18 L18 14 L16 22 Z" fill="var(--purple-soft)" opacity="0.7"/>
+        <path d="M24 6 L22 18 L18 14 L20 22 Z" fill="var(--purple-soft)" opacity="0.7"/>
+      </svg>
+      <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,var(--border-col));"></div>
+    </div>
+
+    <!-- Main logo -->
+    <div class="footer-logo" style="font-size:3rem;letter-spacing:0.15em;margin-bottom:6px;">Jaideep</div>
+    <div class="footer-wakanda" style="margin-bottom:36px;">Wakanda Forever &nbsp;·&nbsp; The King Turns 25 &nbsp;·&nbsp; 13 · 05 · 2026</div>
+
+    <!-- Nav links -->
+    <nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;margin-bottom:44px;" aria-label="Footer navigation">
+      <a href="#about"    style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">About</a>
+      <a href="#triple"   style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Triple Trouble</a>
+      <a href="#gallery"  style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Gallery</a>
+      <a href="#gym"      style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Gym</a>
+      <a href="#office"   style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Office</a>
+      <a href="#funfacts" style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Fun Facts</a>
+      <a href="#message"  style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Message</a>
+    </nav>
+
+    <!-- Triple Trouble trio avatars -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:20px;margin-bottom:40px;">
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid rgba(139,47,201,0.5);margin:0 auto 8px;box-shadow:0 0 18px rgba(139,47,201,0.25);">
+          <img src="photos/navratri.jpg" alt="Shreya" style="width:100%;height:100%;object-fit:cover;object-position:82% top;" />
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;">Shreya</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);margin:0 auto 8px;box-shadow:0 0 24px rgba(255,215,0,0.3);">
+          <img src="photos/jaideep.jpg" alt="Jaideep" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;" />
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:var(--gold);letter-spacing:0.08em;">👑 Jaideep</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid rgba(139,47,201,0.5);margin:0 auto 8px;box-shadow:0 0 18px rgba(139,47,201,0.25);">
+          <img src="photos/kevinjaideep.jpg" alt="Kevin" style="width:100%;height:100%;object-fit:cover;object-position:right top;" />
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;">Kevin</div>
+      </div>
+    </div>
+
+    <!-- Vibranium divider -->
+    <div class="vibranium-line" style="width:280px;margin:0 auto 28px;" aria-hidden="true"></div>
+
+    <!-- Made by -->
+    <p class="footer-copy" style="margin-bottom:10px;">
+      Made with <span style="color:#e74c3c;">♥</span> by <span>Kevin</span> for the greatest designer, gym buddy &amp; best friend.
+    </p>
+    <p class="footer-copy" style="font-size:0.72rem;opacity:0.5;margin-top:4px;">
+      Triple Trouble · AeonX Digital · 2026 &nbsp;·&nbsp; No ego, only love.
+    </p>
+
+  </div>
 </footer>
 
 <!-- ==================== SCRIPTS ==================== -->
@@ -3221,7 +3378,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   const toastDot = document.getElementById('toast-dot');
   if(!btn) return;
 
-  const SECTION_IDS = ['about','triple','gallery','gym','office','withmaa','message'];
+  const SECTION_IDS = ['about','triple','gallery','gym','office','funfacts','message'];
   const SPEED       = 2.5;   // px per frame while crawling through section
   const NAV_H       = 70;    // navbar height offset
 
@@ -3234,7 +3391,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   let phase       = 'idle'; // 'jumping' | 'crawling' | 'idle'
 
   const labels = { about:'About Jaideep', triple:'Triple Trouble', gallery:'Trip Chronicles',
-                   gym:'Gym & Gains', office:'Office Life', withmaa:'With Maa', message:'Message' };
+                   gym:'Gym & Gains', office:'Office Life', funfacts:'Fun Facts', message:'Message' };
 
   function showToast(msg, state){
     toastMsg.textContent = msg;
