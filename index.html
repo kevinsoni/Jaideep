@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Jaideep — The King is 25</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===================== DARK THEME (default) ===================== */
+    :root {
+      --bg-deep:       #04040a;
+      --bg-dark:       #08080f;
+      --bg-card:       #0e0e1c;
+      --bg-card2:      #12122a;
+      --bg-glass:      rgba(14,14,28,0.82);
+      --bg-glass2:     rgba(8,8,15,0.88);
+      --purple-deep:   #2a0a3e;
+      --purple-mid:    #5b1a8a;
+      --purple:        #8b2fc9;
+      --purple-soft:   #b06fe8;
+      --gold:          #ffd700;
+      --gold-dark:     #c9a227;
+      --gold-glow:     #ffec6e;
+      --text-primary:  #f0eeff;
+      --text-muted:    #9090c0;
+      --text-dim:      #5050a0;
+      --vibranium:     #6ee7f7;
+      --vibranium2:    #3ab5d0;
+      --border-col:    rgba(139,47,201,0.28);
+      --border-gold:   rgba(255,215,0,0.28);
+      --shadow-purple: rgba(90,20,140,0.45);
+      --shadow-gold:   rgba(255,215,0,0.22);
+      --nav-bg:        rgba(8,8,15,0.82);
+      --nav-border:    rgba(139,47,201,0.28);
+      --scrollbar:     #5b1a8a;
+      --hero-glow:     rgba(90,20,140,0.38);
+      --mesh1:         rgba(91,26,138,0.14);
+      --mesh2:         rgba(110,231,247,0.07);
+      --mesh3:         rgba(255,215,0,0.05);
+      --card-shine:    rgba(255,255,255,0.025);
+      --overlay-dark:  rgba(0,0,0,0.75);
+      --section-sep:   rgba(139,47,201,0.15);
+      --input-bg:      rgba(14,14,28,0.9);
+    }
+
+    /* ===================== LIGHT THEME ===================== */
+    [data-theme="light"] {
+      --bg-deep:       #f6f2ff;
+      --bg-dark:       #ede5ff;
+      --bg-card:       rgba(255,255,255,0.96);
+      --bg-card2:      rgba(243,237,255,0.98);
+      --bg-glass:      rgba(255,255,255,0.86);
+      --bg-glass2:     rgba(250,246,255,0.94);
+      --purple-deep:   #e8d5ff;
+      --text-primary:  #18083a;
+      --text-muted:    #5c3c82;
+      --text-dim:      #a882c8;
+      --gold:          #a86400;
+      --gold-dark:     #7c4a00;
+      --gold-glow:     #c87a08;
+      --border-col:    rgba(139,47,201,0.22);
+      --border-gold:   rgba(168,100,0,0.28);
+      --shadow-purple: rgba(100,40,160,0.14);
+      --shadow-gold:   rgba(168,100,0,0.14);
+      --nav-bg:        rgba(246,242,255,0.92);
+      --nav-border:    rgba(139,47,201,0.22);
+      --scrollbar:     #9b59b6;
+      --hero-glow:     rgba(139,47,201,0.14);
+      --mesh1:         rgba(139,47,201,0.07);
+      --mesh2:         rgba(58,181,208,0.05);
+      --mesh3:         rgba(168,100,0,0.04);
+      --card-shine:    rgba(255,255,255,0.7);
+      --overlay-dark:  rgba(20,8,50,0.72);
+      --section-sep:   rgba(139,47,201,0.12);
+      --input-bg:      rgba(255,255,255,0.9);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+      transition: background-color 0.55s ease, color 0.55s ease;
+    }
+
+    /* ===== THEME TRANSITION OVERLAY ===== */
+    #theme-ripple {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: scale(0);
+      opacity: 0;
+      width: 10px; height: 10px;
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--purple), var(--gold), var(--vibranium));
+      z-index: 10001; transition: width 0.08s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    #cursor {
+      position: fixed; width: 16px; height: 16px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: difference;
+    }
+    #cursor-trail {
+      position: fixed; width: 34px; height: 34px;
+      border: 1.5px solid var(--purple-soft); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      opacity: 0.5; transition: border-color 0.3s;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+
+    /* ===== PARTICLE CANVAS ===== */
+    #particle-canvas {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+      transition: opacity 0.5s;
+    }
+    [data-theme="light"] #particle-canvas { opacity: 0.35; }
+
+    /* ===== MESH BG ORBS ===== */
+    .mesh-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .mesh-orb { position: absolute; border-radius: 50%; filter: blur(90px); animation: orbFloat 14s ease-in-out infinite; }
+    .mesh-orb:nth-child(1) { width: 700px; height: 700px; background: var(--mesh1); top: -15%; left: -15%; animation-delay: 0s; }
+    .mesh-orb:nth-child(2) { width: 500px; height: 500px; background: var(--mesh2); top: 25%; right: -8%; animation-delay: -5s; }
+    .mesh-orb:nth-child(3) { width: 400px; height: 400px; background: var(--mesh3); bottom: 5%; left: 25%; animation-delay: -9s; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      background: var(--nav-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--nav-border);
+      border-radius: 50px; padding: 9px 22px;
+      z-index: 500; display: flex; gap: 20px; align-items: center;
+      transition: background 0.55s, border-color 0.55s, box-shadow 0.3s;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+    }
+    nav.scrolled { box-shadow: 0 8px 40px var(--shadow-purple); }
+    nav a {
+      color: var(--text-muted); text-decoration: none;
+      font-family: 'Orbitron', sans-serif; font-size: 0.56rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s; cursor: pointer;
+    }
+    nav a:hover, nav a.active { color: var(--gold); }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 0.92rem; color: var(--gold); font-weight: 700; cursor: pointer; }
+
+    /* Theme toggle */
+    #theme-btn {
+      background: var(--bg-card); border: 1px solid var(--border-col);
+      border-radius: 50px; padding: 5px 10px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden; width: 62px; height: 30px;
+    }
+    #theme-btn:hover { border-color: var(--purple-soft); box-shadow: 0 0 14px var(--shadow-purple); }
+    .t-icon {
+      position: absolute; transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .t-moon { opacity: 1; transform: translateX(0) scale(1); }
+    .t-sun  { opacity: 0; transform: translateX(16px) scale(0.4) rotate(90deg); }
+    [data-theme="light"] .t-moon { opacity: 0; transform: translateX(-16px) scale(0.4) rotate(-90deg); }
+    [data-theme="light"] .t-sun  { opacity: 1; transform: translateX(0) scale(1) rotate(0deg); }
+
+    /* ===== SECTIONS ===== */
+    section { position: relative; z-index: 1; padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Orbitron', sans-serif; font-size: 0.63rem; letter-spacing: 0.32em;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 12px; display: block;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif; font-size: clamp(2rem,5vw,3.5rem);
+      font-weight: 700; line-height: 1.1; margin-bottom: 20px; color: var(--text-primary);
+    }
+    .section-title span { color: var(--gold); }
+    .section-desc { font-size: 1.15rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; }
+    .divider { width: 80px; height: 3px; background: linear-gradient(90deg,var(--purple),var(--gold)); margin: 20px 0 40px; border-radius: 2px; }
+
+    /* ===== REVEAL ANIMATIONS ===== */
+    .reveal        { opacity:0; transform:translateY(44px);  transition:opacity 0.8s cubic-bezier(.22,1,.36,1),transform 0.8s cubic-bezier(.22,1,.36,1); }
+    .reveal-left   { opacity:0; transform:translateX(-50px); transition:opacity 0.8s cubic-bezier(.22,1,.36,1),transform 0.8s cubic-bezier(.22,1,.36,1); }
+    .reveal-right  { opacity:0; transform:translateX(50px);  transition:opacity 0.8s cubic-bezier(.22,1,.36,1),transform 0.8s cubic-bezier(.22,1,.36,1); }
+    .reveal-scale  { opacity:0; transform:scale(0.88);       transition:opacity 0.7s cubic-bezier(.22,1,.36,1),transform 0.7s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible { opacity:1; transform:none; }
+
+    /* ===== LOADING SCREEN ===== */
+    #loading {
+      position: fixed; inset: 0; background: #04040a;
+      z-index: 100000; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      animation: loadFade 0.6s ease 2.3s forwards;
+    }
+    .load-logo {
+      font-family: 'Cinzel', serif; font-size: clamp(2.5rem,8vw,5rem); font-weight: 900;
+      background: linear-gradient(135deg,#ffd700,#b06fe8,#6ee7f7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: loadPulse 1.4s ease-in-out infinite;
+    }
+    .load-sub {
+      font-family: 'Orbitron', sans-serif; font-size: 0.58rem; letter-spacing: 0.55em;
+      color: #6ee7f7; text-transform: uppercase; margin-top: 14px;
+      animation: fadeIn 0.5s ease 0.5s both;
+    }
+    .load-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; margin-top: 36px; overflow: hidden; }
+    .load-bar-fill { height: 100%; width: 0; background: linear-gradient(90deg,#8b2fc9,#ffd700,#6ee7f7); animation: loadFill 2s ease 0.2s forwards; }
+
+    /* ===== HERO ===== */
+    #hero { min-height: 100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:0 24px; overflow:hidden; }
+    .hero-bg-glow { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 50%, var(--hero-glow) 0%, transparent 70%); pointer-events:none; }
+
+    .wakanda-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 0.4em;
+      color: var(--vibranium); text-transform: uppercase;
+      border: 1px solid rgba(110,231,247,0.38); padding: 8px 22px; border-radius: 30px;
+      margin-bottom: 32px; background: rgba(110,231,247,0.07);
+      animation: fadeSlideDown 0.8s ease 0.3s both;
+    }
+    .wakanda-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--vibranium); animation: pulseDot 1.5s ease infinite; flex-shrink: 0; }
+
+    .hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(3.5rem,12vw,9rem);
+      font-weight: 900; line-height: 0.9;
+      animation: fadeSlideUp 0.9s ease 0.5s both;
+    }
+    .hero-title .name-line {
+      display: block;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 40%, var(--purple-soft) 75%, #fff 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: fadeSlideUp 0.9s ease 0.5s both, textShimmer 5s linear 1.5s infinite;
+    }
+    [data-theme="light"] .hero-title .name-line {
+      background: linear-gradient(135deg, var(--purple-mid) 0%, var(--gold) 40%, var(--purple) 75%, var(--purple-mid) 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-title .bday-line {
+      display: block; font-size: 0.35em; color: var(--text-muted); letter-spacing: 0.15em;
+      -webkit-text-fill-color: var(--text-muted); background: none; margin-top: 10px;
+    }
+
+    /* Countdown */
+    .hero-countdown {
+      margin: 28px auto 8px;
+      animation: fadeSlideUp 0.9s ease 0.7s both;
+    }
+    .countdown-label {
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; letter-spacing: 0.35em;
+      color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .countdown-tiles {
+      display: inline-flex; gap: 12px; align-items: center;
+    }
+    .cdown-tile {
+      background: var(--bg-card); border: 1px solid var(--border-col);
+      border-radius: 12px; padding: 10px 16px; min-width: 72px; text-align: center;
+      transition: background 0.5s, border-color 0.5s;
+    }
+    .cdown-num { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .cdown-unit { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; margin-top: 3px; }
+    .cdown-sep { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--text-dim); }
+    .countdown-done {
+      font-family: 'Cinzel', serif; font-size: clamp(1.2rem,3vw,2rem); color: var(--gold);
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 30px rgba(255,215,0,0.5);
+      animation: glowPulse 2s ease infinite;
+    }
+
+    .age-counter-wrap {
+      margin: 12px auto 28px;
+      display: inline-flex; align-items: baseline; gap: 6px;
+      animation: fadeSlideUp 0.9s ease 0.9s both;
+    }
+    .age-number {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(4rem,15vw,10rem);
+      font-weight: 900; line-height: 1;
+      background: linear-gradient(180deg, var(--gold-glow) 0%, var(--gold-dark) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 32px rgba(255,215,0,0.55));
+    }
+    .age-label { font-family: 'Cinzel', serif; font-size: 1.35rem; color: var(--text-muted); letter-spacing: 0.1em; }
+
+    .hero-date {
+      font-family: 'Orbitron', sans-serif; font-size: 0.72rem; letter-spacing: 0.3em;
+      color: var(--gold); margin-bottom: 34px;
+      animation: fadeSlideUp 0.9s ease 1.1s both;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+      color: #fff; padding: 14px 36px; border-radius: 50px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em;
+      text-decoration: none; border: 1px solid var(--purple-soft);
+      box-shadow: 0 0 40px rgba(139,47,201,0.4);
+      transition: box-shadow 0.3s, transform 0.2s;
+      animation: fadeSlideUp 0.9s ease 1.3s both; cursor: pointer;
+    }
+    .hero-cta:hover { box-shadow: 0 0 60px rgba(139,47,201,0.7), 0 0 0 1px var(--purple-soft); transform: translateY(-3px); }
+
+    .claw-left, .claw-right { position:absolute; top:50%; pointer-events:none; opacity:0.18; animation:clawReveal 1.5s ease 0.2s both; }
+    .claw-left  { left:0;  transform:translateY(-50%); }
+    .claw-right { right:0; transform:translateY(-50%) scaleX(-1); }
+    [data-theme="light"] .claw-left, [data-theme="light"] .claw-right { opacity: 0.08; }
+
+    .scroll-hint { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; animation:fadeIn 1s ease 2.2s both; }
+    .scroll-hint span { font-family:'Orbitron',sans-serif; font-size:0.48rem; letter-spacing:0.3em; color:var(--text-dim); }
+    .scroll-line { width:1px; height:50px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 1.5s ease infinite; }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--bg-deep); transition: background 0.55s; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .about-photo-box {
+      aspect-ratio:3/4; border-radius:24px; overflow:hidden;
+      border:2px solid var(--border-col); background:var(--bg-card);
+      position:relative; box-shadow:0 0 60px var(--shadow-purple);
+      transition:border-color 0.35s, box-shadow 0.35s, background 0.55s;
+    }
+    .about-photo-box:hover { border-color:var(--gold); box-shadow:0 0 80px var(--shadow-gold); }
+    .about-photo-box img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+    .about-photo-box:hover img { transform:scale(1.04); }
+    .about-photo-badge {
+      position:absolute; bottom:20px; left:20px; right:20px;
+      background:var(--bg-glass2); backdrop-filter:blur(14px);
+      border:1px solid var(--border-gold); border-radius:14px; padding:12px 16px;
+      display:flex; align-items:center; gap:10px;
+      transition:background 0.55s, border-color 0.55s;
+    }
+    .badge-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); animation:pulseDot 1.5s ease infinite; }
+    .badge-text { font-size:0.8rem; color:var(--text-primary); font-weight:600; }
+    .badge-sub { font-size:0.65rem; color:var(--text-muted); }
+    .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
+    .stat-card {
+      background:var(--bg-card); border:1px solid var(--border-col); border-radius:16px; padding:22px;
+      transition:border-color 0.3s, box-shadow 0.3s, background 0.55s, transform 0.3s; cursor:default;
+    }
+    .stat-card:hover { border-color:var(--gold); box-shadow:0 0 24px var(--shadow-gold); transform:translateY(-3px); }
+    .stat-num { font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:700; color:var(--gold); line-height:1; }
+    .stat-desc { font-size:0.85rem; color:var(--text-muted); margin-top:6px; }
+
+    /* ===== TRIPLE TROUBLE ===== */
+    #triple { background:var(--bg-dark); text-align:center; transition:background 0.55s; }
+    .triple-badge { display:inline-block; font-family:'Cinzel',serif; font-size:2.5rem; font-weight:900; background:linear-gradient(135deg,var(--gold) 0%,var(--purple-soft) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+    .triple-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:60px; }
+    .triple-card {
+      background:var(--bg-card); border:1px solid var(--border-col);
+      border-radius:24px; padding:36px 24px; position:relative; overflow:hidden;
+      transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s, border-color 0.35s, background 0.55s;
+      cursor:default; will-change:transform;
+    }
+    .triple-card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%,rgba(139,47,201,0.14) 0%,transparent 60%); }
+    .triple-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--card-shine) 0%,transparent 55%); pointer-events:none; }
+    .triple-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 24px 70px var(--shadow-purple); border-color:var(--purple-soft); }
+    .triple-card.king { border-color:rgba(255,215,0,0.45); background:linear-gradient(180deg,rgba(255,215,0,0.07) 0%,var(--bg-card) 100%); }
+    .triple-card.king::before { background:radial-gradient(circle at 50% 0%,rgba(255,215,0,0.16) 0%,transparent 60%); }
+    .triple-card.king:hover { box-shadow:0 24px 70px var(--shadow-gold); border-color:var(--gold); }
+    .member-photo {
+      width:104px; height:104px; border-radius:50%; margin:0 auto 20px;
+      overflow:hidden; border:3px solid var(--border-col);
+      position:relative; background:var(--bg-card2);
+      display:flex; align-items:center; justify-content:center;
+      transition:border-color 0.3s, box-shadow 0.3s;
+    }
+    .triple-card:hover .member-photo { border-color:var(--purple-soft); box-shadow:0 0 22px var(--shadow-purple); }
+    .triple-card.king .member-photo { border-color:rgba(255,215,0,0.75); }
+    .triple-card.king:hover .member-photo { box-shadow:0 0 22px var(--shadow-gold); }
+    .member-photo img { width:100%; height:100%; object-fit:cover; }
+    .member-initials { font-family:'Cinzel',serif; font-size:2rem; font-weight:700; color:var(--purple-soft); }
+    .triple-card.king .member-initials { color:var(--gold); }
+    .member-crown { position:absolute; top:-14px; left:50%; transform:translateX(-50%); font-size:1.4rem; }
+    .member-name { font-family:'Cinzel',serif; font-size:1.35rem; font-weight:700; margin-bottom:4px; color:var(--text-primary); }
+    .member-role { font-size:0.78rem; color:var(--text-muted); font-family:'Orbitron',sans-serif; letter-spacing:0.1em; margin-bottom:16px; }
+    .triple-card.king .member-role { color:var(--gold); }
+    .member-tags { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .tag { font-size:0.7rem; padding:4px 12px; border-radius:20px; background:rgba(139,47,201,0.15); border:1px solid var(--border-col); color:var(--purple-soft); font-weight:500; }
+    .triple-card.king .tag { background:rgba(255,215,0,0.1); border-color:var(--border-gold); color:var(--gold); }
+
+    /* ===== GALLERY ===== */
+    #gallery { background:var(--bg-deep); transition:background 0.55s; }
+    .gallery-masonry { display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:240px; gap:16px; margin-top:48px; }
+    .g-wide { grid-column:span 2; }
+    .g-tall { grid-row:span 2; }
+    .g-big  { grid-column:span 2; grid-row:span 2; }
+    .trip-card {
+      border-radius:18px; overflow:hidden; position:relative;
+      background:var(--bg-card); border:1px solid var(--border-col);
+      transition:transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s, border-color 0.35s;
+      cursor:zoom-in;
+    }
+    .trip-card:hover { transform:scale(1.03); box-shadow:0 20px 60px var(--shadow-purple); border-color:var(--purple-soft); }
+    .trip-card img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; display:block; }
+    .trip-card:hover img { transform:scale(1.1); }
+    .trip-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 55%); }
+    .trip-info { position:absolute; bottom:0; left:0; right:0; padding:20px 20px 18px; transform:translateY(5px); transition:transform 0.3s; }
+    .trip-card:hover .trip-info { transform:translateY(0); }
+    .trip-name { font-family:'Cinzel',serif; font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:3px; }
+    .trip-desc { font-size:0.75rem; color:rgba(255,255,255,0.55); }
+
+    /* ===== LIGHTBOX ===== */
+    #lightbox {
+      position:fixed; inset:0; z-index:10000;
+      background:rgba(0,0,0,0.96); backdrop-filter:blur(20px);
+      display:none; align-items:center; justify-content:center;
+      cursor:zoom-out;
+    }
+    #lightbox.open { display:flex; animation:fadeIn 0.3s ease; }
+    #lightbox img { max-width:90vw; max-height:88vh; border-radius:12px; object-fit:contain; box-shadow:0 0 80px rgba(139,47,201,0.5); pointer-events:none; }
+    #lb-close {
+      position:absolute; top:24px; right:28px;
+      background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+      color:#fff; border-radius:50%; width:44px; height:44px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:1.3rem; transition:background 0.2s;
+    }
+    #lb-close:hover { background:rgba(139,47,201,0.5); }
+    #lb-caption { position:absolute; bottom:28px; left:0; right:0; text-align:center; color:rgba(255,255,255,0.65); font-family:'Cinzel',serif; font-size:0.9rem; }
+    #lb-prev, #lb-next {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+      color:#fff; width:48px; height:48px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:background 0.2s; font-size:1.2rem;
+    }
+    #lb-prev { left:24px; }
+    #lb-next { right:24px; }
+    #lb-prev:hover, #lb-next:hover { background:rgba(139,47,201,0.4); }
+
+    /* ===== GYM ===== */
+    #gym { background:linear-gradient(180deg,var(--bg-dark) 0%,var(--bg-deep) 100%); transition:background 0.55s; }
+    .gym-layout { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .gym-visual {
+      aspect-ratio:1; border-radius:24px; overflow:hidden;
+      background:var(--bg-card); border:2px solid var(--border-col);
+      position:relative; box-shadow:0 0 60px var(--shadow-purple);
+      transition:border-color 0.35s, box-shadow 0.35s;
+    }
+    .gym-visual:hover { border-color:var(--gold); box-shadow:0 0 80px var(--shadow-gold); }
+    .gym-visual img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.5s; }
+    .gym-visual:hover img { transform:scale(1.04); }
+    .gym-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
+    .gym-stat {
+      background:var(--bg-card); border:1px solid var(--border-col);
+      border-radius:14px; padding:20px; text-align:center;
+      transition:border-color 0.3s, box-shadow 0.3s, background 0.55s, transform 0.3s;
+    }
+    .gym-stat:hover { border-color:var(--gold); box-shadow:0 0 20px var(--shadow-gold); transform:translateY(-3px); }
+    .gym-stat-icon { margin-bottom:8px; display:block; }
+    .gym-stat-val { font-family:'Orbitron',sans-serif; font-size:1.1rem; color:var(--gold); font-weight:700; }
+    .gym-stat-label { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+
+    /* ===== OFFICE ===== */
+    #office { background:var(--bg-deep); transition:background 0.55s; }
+    .office-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+    .o-card {
+      border-radius:18px; overflow:hidden; aspect-ratio:3/4;
+      border:1px solid var(--border-col); position:relative;
+      transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor:zoom-in;
+    }
+    .o-card:hover { transform:translateY(-6px); box-shadow:0 16px 50px var(--shadow-purple); border-color:var(--purple-soft); }
+    .o-card img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+    .o-card:hover img { transform:scale(1.06); }
+    .o-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,transparent 52%); }
+    .o-card-label { position:absolute; bottom:18px; left:18px; }
+    .o-card-title { font-family:'Cinzel',serif; font-size:0.95rem; font-weight:700; color:#fff; }
+    .o-card-sub { font-size:0.72rem; color:rgba(255,255,255,0.55); margin-top:2px; }
+
+    /* ===== FUN FACTS ===== */
+    #funfacts { background:var(--bg-dark); text-align:center; transition:background 0.55s; }
+    .facts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
+    .fact-card {
+      background:var(--bg-card); border:1px solid var(--border-col);
+      border-radius:20px; padding:32px 24px; position:relative; overflow:hidden;
+      transition:transform 0.32s cubic-bezier(.22,1,.36,1), border-color 0.3s, box-shadow 0.3s, background 0.55s;
+      cursor:default;
+    }
+    .fact-card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--card-shine) 0%,transparent 55%); pointer-events:none; }
+    .fact-card:hover { transform:translateY(-8px); border-color:var(--gold); box-shadow:0 16px 50px var(--shadow-gold); }
+    .fact-icon {
+      width:60px; height:60px; border-radius:16px;
+      background:linear-gradient(135deg,var(--purple-deep),var(--purple-mid));
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 20px;
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .fact-card:hover .fact-icon { transform:scale(1.12) rotate(6deg); box-shadow:0 0 22px var(--shadow-purple); }
+    .fact-title { font-family:'Cinzel',serif; font-size:0.95rem; font-weight:700; color:var(--gold); margin-bottom:10px; }
+    .fact-body { font-size:0.9rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ===== WITH MAA ===== */
+    #withmaa { background:var(--bg-dark); padding:80px 24px; position:relative; z-index:1; transition:background 0.55s; }
+
+    /* ===== MESSAGE ===== */
+    #message { background:var(--bg-deep); text-align:center; transition:background 0.55s; }
+    .message-card {
+      background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-card2) 100%);
+      border:1px solid var(--border-gold); border-radius:28px; padding:60px 48px;
+      max-width:780px; margin:0 auto;
+      box-shadow:0 0 80px var(--shadow-purple), inset 0 0 60px rgba(255,215,0,0.02);
+      position:relative; overflow:hidden;
+      transition:background 0.55s, border-color 0.55s, box-shadow 0.55s;
+    }
+    .message-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(139,47,201,0.14) 0%,transparent 70%); }
+    .message-quote { font-family:'Cinzel',serif; font-size:clamp(1.4rem,3vw,2.2rem); font-weight:700; line-height:1.45; color:var(--text-primary); position:relative; z-index:1; margin-bottom:28px; }
+    .message-quote em { color:var(--gold); font-style:normal; }
+    .message-sub { font-size:1rem; color:var(--text-muted); line-height:1.8; position:relative; z-index:1; max-width:560px; margin:0 auto 32px; }
+    .message-from { font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:0.25em; color:var(--gold); position:relative; z-index:1; }
+
+    /* ===== CONFETTI ===== */
+    .confetti-piece { position:fixed; border-radius:2px; pointer-events:none; z-index:9000; animation:confettiFall linear forwards; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:var(--bg-deep); border-top:1px solid var(--section-sep);
+      text-align:center; padding:52px 24px; position:relative; z-index:1;
+      transition:background 0.55s, border-color 0.55s;
+    }
+    .footer-logo { font-family:'Cinzel',serif; font-size:2rem; font-weight:900; letter-spacing:0.1em; background:linear-gradient(135deg,var(--gold),var(--purple-soft)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+    .footer-wakanda { font-family:'Orbitron',sans-serif; font-size:0.63rem; letter-spacing:0.4em; color:var(--vibranium); text-transform:uppercase; margin-bottom:24px; }
+    .footer-copy { font-size:0.8rem; color:var(--text-dim); }
+    .footer-copy span { color:var(--gold); }
+
+    /* ===== SCROLL TO TOP ===== */
+    #scroll-top {
+      position:fixed; bottom:32px; right:32px; width:48px; height:48px; border-radius:50%;
+      background:linear-gradient(135deg,var(--purple-mid),var(--purple));
+      border:1px solid var(--purple-soft); color:#fff; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      z-index:490; opacity:0; transform:translateY(20px);
+      transition:opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow:0 0 20px var(--shadow-purple);
+    }
+    #scroll-top.visible { opacity:1; transform:translateY(0); }
+    #scroll-top:hover { box-shadow:0 0 32px rgba(139,47,201,0.7); transform:translateY(-4px); }
+
+    /* ===== VIBRANIUM LINE ===== */
+    .vibranium-line { height:2px; margin:0 auto; border-radius:1px; background:linear-gradient(90deg,transparent,var(--vibranium),transparent); animation:shimmer 3s ease infinite; }
+
+    /* ===== KEYFRAMES ===== */
+    @keyframes fadeSlideDown  { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeSlideUp    { from{opacity:0;transform:translateY(30px)}  to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn         { from{opacity:0} to{opacity:1} }
+    @keyframes clawReveal     { from{opacity:0;transform:translateY(-50%) translateX(-40px)} to{opacity:0.18;transform:translateY(-50%) translateX(0)} }
+    @keyframes scrollPulse    { 0%,100%{opacity:0.3;transform:scaleY(0.8)} 50%{opacity:1;transform:scaleY(1)} }
+    @keyframes pulseDot       { 0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,0.45)} 50%{box-shadow:0 0 0 7px rgba(255,215,0,0)} }
+    @keyframes shimmer        { 0%,100%{opacity:0.5} 50%{opacity:1} }
+    @keyframes textShimmer    { 0%{background-position:0% 50%} 100%{background-position:250% 50%} }
+    @keyframes confettiFall   { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(110vh) rotate(720deg);opacity:0} }
+    @keyframes glowPulse      { 0%,100%{filter:drop-shadow(0 0 12px rgba(255,215,0,0.4))} 50%{filter:drop-shadow(0 0 28px rgba(255,215,0,0.8))} }
+    @keyframes orbFloat       { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(50px,-35px) scale(1.06)} 66%{transform:translate(-25px,25px) scale(0.94)} }
+    @keyframes loadFade       { to{opacity:0;pointer-events:none;visibility:hidden} }
+    @keyframes loadPulse      { 0%,100%{filter:drop-shadow(0 0 18px rgba(255,215,0,0.3))} 50%{filter:drop-shadow(0 0 40px rgba(255,215,0,0.8))} }
+    @keyframes loadFill       { to{width:100%} }
+    @keyframes cardTiltReset  { to{transform:perspective(800px) rotateX(0deg) rotateY(0deg)} }
+    @keyframes float          { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    /* ===== HAMBURGER ===== */
+    #ham-btn {
+      display: none; flex-direction: column; gap: 4px; cursor: pointer;
+      background: none; border: none; padding: 4px; z-index: 600;
+    }
+    #ham-btn span {
+      display: block; width: 22px; height: 2px; border-radius: 2px;
+      background: var(--gold); transition: transform 0.3s, opacity 0.3s, width 0.3s;
+    }
+    #ham-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #ham-btn.open span:nth-child(2) { opacity: 0; width: 0; }
+    #ham-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    #mobile-menu {
+      display: flex; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg-glass2); backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      z-index: 400; flex-direction: column; align-items: center; justify-content: center;
+      gap: 28px; opacity: 0; pointer-events: none; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: auto; visibility: visible; }
+    #mobile-menu a {
+      font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 6vw, 2.2rem);
+      font-weight: 700; color: var(--text-primary); text-decoration: none;
+      letter-spacing: 0.06em; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--gold); }
+    #mobile-menu .mm-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--purple), var(--gold)); border-radius: 1px; }
+
+    /* ===== TOUCH — disable custom cursor on touch devices ===== */
+    @media(hover:none) and (pointer:coarse) {
+      body { cursor: auto; }
+      #cursor, #cursor-trail { display: none; }
+    }
+
+    /* ===== TABLET (≤ 900px) ===== */
+    @media(max-width:900px){
+      .triple-cards { grid-template-columns: repeat(3,1fr); gap: 16px; }
+      .triple-card { padding: 28px 16px; }
+      .office-grid { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    }
+
+    /* ===== MOBILE (≤ 768px) ===== */
+    @media(max-width:768px){
+      /* Nav */
+      nav a { display: none; }
+      #ham-btn { display: flex; }
+      nav { padding: 8px 16px; gap: 12px; top: 12px; }
+
+      /* Section padding */
+      section { padding: 70px 20px; }
+      #office, #withmaa { padding: 60px 20px; }
+
+      /* Hide claws on mobile - they bleed off screen */
+      .claw-left, .claw-right { display: none; }
+
+      /* Hero */
+      .wakanda-badge { font-size: 0.48rem; letter-spacing: 0.22em; padding: 7px 16px; margin-bottom: 24px; }
+      .hero-date { font-size: 0.58rem; letter-spacing: 0.16em; margin-bottom: 24px; }
+      .hero-cta { padding: 12px 28px; font-size: 0.65rem; }
+      .age-label { font-size: 1rem; }
+
+      /* Countdown tiles */
+      .countdown-tiles { gap: 6px; }
+      .cdown-tile { padding: 8px 10px; min-width: 56px; border-radius: 10px; }
+      .cdown-num { font-size: 1.3rem; }
+      .cdown-sep { font-size: 1.3rem; }
+      .cdown-unit { font-size: 0.45rem; }
+      .hero-countdown { margin: 20px auto 6px; }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-photo-box { aspect-ratio: 4/3; max-height: 320px; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .gym-layout { grid-template-columns: 1fr; gap: 40px; }
+      .gym-visual { aspect-ratio: 4/3; }
+
+      /* Triple */
+      .triple-cards { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+      .triple-badge { font-size: 2rem; }
+
+      /* Triple group banner */
+      .triple-group-banner img { height: 280px !important; object-position: center 40% !important; }
+
+      /* Gallery */
+      .gallery-masonry {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 190px;
+        gap: 10px;
+      }
+      /* On mobile, flatten all span classes to single cell */
+      .g-wide { grid-column: span 2; }
+      .g-tall { grid-row: span 1; }
+      .g-big  { grid-column: span 2; grid-row: span 1; }
+      .trip-name { font-size: 0.9rem; }
+      .trip-desc { display: none; }
+
+      /* Office */
+      .office-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .day-one-banner { margin-bottom: 16px !important; }
+      .day-one-text { left: 20px !important; right: 20px !important; top: auto !important; bottom: 0 !important; transform: none !important; background: linear-gradient(to top, rgba(4,4,10,0.95) 0%, rgba(4,4,10,0.6) 100%); padding: 20px !important; max-width: 100% !important; }
+      .day-one-text h2 { font-size: 1.4rem !important; }
+      .day-one-text p { display: none; }
+
+      /* With Maa grid */
+      .withmaa-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .withmaa-photo { aspect-ratio: 4/3 !important; max-height: 320px; }
+
+      /* Fun facts */
+      .facts-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .fact-card { padding: 24px 18px; }
+
+      /* Message */
+      .message-card { padding: 36px 22px; border-radius: 20px; }
+
+      /* Lightbox nav */
+      #lb-prev { left: 12px; width: 40px; height: 40px; }
+      #lb-next { right: 12px; width: 40px; height: 40px; }
+
+      /* Scroll to top */
+      #scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; }
+
+      /* Load sub */
+      .load-sub { letter-spacing: 0.25em; font-size: 0.52rem; }
+    }
+
+    /* ===== SMALL MOBILE (≤ 480px) ===== */
+    @media(max-width:480px){
+      section { padding: 56px 16px; }
+      #office, #withmaa { padding: 48px 16px; }
+
+      /* Hero */
+      .hero-countdown { overflow-x: auto; padding-bottom: 4px; }
+      .countdown-tiles { gap: 5px; }
+      .cdown-tile { min-width: 50px; padding: 7px 8px; }
+      .cdown-num { font-size: 1.1rem; }
+      .cdown-sep { font-size: 1.1rem; }
+      .hero-date { letter-spacing: 0.1em; }
+      .wakanda-badge { letter-spacing: 0.15em; font-size: 0.42rem; }
+      .age-label { font-size: 0.85rem; }
+
+      /* Gallery — single column for very small */
+      .gallery-masonry {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+        gap: 10px;
+      }
+      .g-wide, .g-big { grid-column: span 1; }
+      .g-tall { grid-row: span 1; }
+
+      /* Facts — single column */
+      .facts-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Office — single column */
+      .office-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Triple */
+      .triple-badge { font-size: 1.7rem; }
+      .member-name { font-size: 1.15rem; }
+
+      /* Message */
+      .message-card { padding: 28px 16px; border-radius: 16px; }
+      .message-quote { font-size: 1.25rem; }
+
+      /* Footer */
+      footer { padding: 40px 16px; }
+      .footer-wakanda { letter-spacing: 0.2em; font-size: 0.55rem; }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading">
+  <div class="load-logo">Jaideep</div>
+  <div class="load-sub">Wakanda Forever · The King is 25</div>
+  <div class="load-bar"><div class="load-bar-fill"></div></div>
+</div>
+
+<!-- Theme Ripple Overlay -->
+<div id="theme-ripple"></div>
+
+<!-- Scroll Progress -->
+<div id="progress-bar"></div>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Particle Canvas -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="lb-close" aria-label="Close">&times;</button>
+  <button id="lb-prev" aria-label="Previous">&#8592;</button>
+  <img id="lb-img" src="" alt="" />
+  <button id="lb-next" aria-label="Next">&#8594;</button>
+  <div id="lb-caption"></div>
+</div>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mm-divider"></div>
+  <a href="#about"   id="mm-about">About</a>
+  <a href="#triple"  id="mm-triple">Triple Trouble</a>
+  <a href="#gallery" id="mm-gallery">Gallery</a>
+  <a href="#gym"     id="mm-gym">Gym</a>
+  <a href="#office"  id="mm-office">Office</a>
+  <a href="#message" id="mm-message">Message</a>
+  <div class="mm-divider"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" aria-label="Page navigation">
+  <span class="nav-logo">J</span>
+  <a href="#about">About</a>
+  <a href="#triple">Triple</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#gym">Gym</a>
+  <a href="#office">Office</a>
+  <a href="#message">Message</a>
+  <button id="ham-btn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <button id="theme-btn" aria-label="Toggle light/dark mode" title="Toggle theme">
+    <!-- Moon -->
+    <span class="t-icon t-moon">
+      <svg width="16" height="16" fill="none" stroke="#b06fe8" stroke-width="1.8" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </span>
+    <!-- Sun -->
+    <span class="t-icon t-sun">
+      <svg width="16" height="16" fill="none" stroke="#a86400" stroke-width="1.8" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </span>
+  </button>
+</nav>
+
+<!-- Scroll to Top -->
+<button id="scroll-top" aria-label="Scroll to top">
+  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="mesh-bg">
+    <div class="mesh-orb"></div>
+    <div class="mesh-orb"></div>
+    <div class="mesh-orb"></div>
+  </div>
+
+  <svg class="claw-left" width="180" height="500" viewBox="0 0 180 500" fill="none" aria-hidden="true">
+    <path d="M20 0 L80 500" stroke="url(#cg1)" stroke-width="3"/>
+    <path d="M55 0 L115 500" stroke="url(#cg1)" stroke-width="2"/>
+    <path d="M90 0 L150 500" stroke="url(#cg1)" stroke-width="2.5"/>
+    <path d="M125 0 L180 500" stroke="url(#cg1)" stroke-width="1.5"/>
+    <defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#7b2d8b"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+  </svg>
+  <svg class="claw-right" width="180" height="500" viewBox="0 0 180 500" fill="none" aria-hidden="true">
+    <path d="M20 0 L80 500" stroke="url(#cg2)" stroke-width="3"/>
+    <path d="M55 0 L115 500" stroke="url(#cg2)" stroke-width="2"/>
+    <path d="M90 0 L150 500" stroke="url(#cg2)" stroke-width="2.5"/>
+    <path d="M125 0 L180 500" stroke="url(#cg2)" stroke-width="1.5"/>
+    <defs><linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#7b2d8b"/><stop offset="1" stop-color="transparent"/></linearGradient></defs>
+  </svg>
+
+  <div class="hero-content" style="position:relative;z-index:2;">
+    <div class="wakanda-badge"><span class="wakanda-dot"></span>Wakanda Forever — The King is Crowned</div>
+
+    <h1 class="hero-title">
+      <span class="name-line">Jaideep</span>
+      <span class="bday-line">Happy Birthday</span>
+    </h1>
+
+    <!-- Countdown -->
+    <div class="hero-countdown">
+      <div class="countdown-label" id="cd-label">Until the King's Day</div>
+      <div id="countdown-wrap" class="countdown-tiles">
+        <div class="cdown-tile"><div class="cdown-num" id="cd-d">00</div><div class="cdown-unit">Days</div></div>
+        <div class="cdown-sep">:</div>
+        <div class="cdown-tile"><div class="cdown-num" id="cd-h">00</div><div class="cdown-unit">Hours</div></div>
+        <div class="cdown-sep">:</div>
+        <div class="cdown-tile"><div class="cdown-num" id="cd-m">00</div><div class="cdown-unit">Mins</div></div>
+        <div class="cdown-sep">:</div>
+        <div class="cdown-tile"><div class="cdown-num" id="cd-s">00</div><div class="cdown-unit">Secs</div></div>
+      </div>
+    </div>
+
+    <div class="age-counter-wrap" aria-label="Turning 25 years old">
+      <span class="age-number" id="age-counter">0</span>
+      <span class="age-label">Years<br/>of Reign</span>
+    </div>
+
+    <p class="hero-date">13 · 05 · 2001 &rarr; 13 · 05 · 2026</p>
+    <a href="#about" class="hero-cta">Explore the Legacy</a>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="mesh-bg"><div class="mesh-orb"></div><div class="mesh-orb"></div></div>
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="about-photo-box">
+          <img src="photos/jaideep.jpg" alt="Jaideep — The King" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+          <div class="about-photo-badge">
+            <div class="badge-dot"></div>
+            <div>
+              <div class="badge-text">The King of Design</div>
+              <div class="badge-sub">UI/UX Designer · Triple Trouble</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="section-label">Who is the King</span>
+        <h2 class="section-title">The Legend That is <span>Jaideep</span></h2>
+        <div class="divider"></div>
+        <p class="section-desc">A designer by craft, a warrior by spirit. Jaideep brings colour and life to every screen he touches — and brings laughter and chaos to every trip we take together. Born to stand out, trained to stay humble, always ready for a gym session or a plate of sukhi bhel.</p>
+        <div class="about-stats">
+          <div class="stat-card reveal"><div class="stat-num">25</div><div class="stat-desc">Years of Pure Excellence</div></div>
+          <div class="stat-card reveal" style="transition-delay:0.1s"><div class="stat-num">7+</div><div class="stat-desc">Epic Trips Together</div></div>
+          <div class="stat-card reveal" style="transition-delay:0.2s"><div class="stat-num">∞</div><div class="stat-desc">Gym Sessions as Buddies</div></div>
+          <div class="stat-card reveal" style="transition-delay:0.3s"><div class="stat-num">1</div><div class="stat-desc">Black Panther Superfan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="vibranium-line" style="width:60%;max-width:600px;" aria-hidden="true"></div>
+
+<!-- ==================== TRIPLE TROUBLE ==================== -->
+<section id="triple">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">The Legendary Trio</span>
+      <div class="triple-badge">Triple Trouble</div>
+      <p class="section-desc" style="margin:0 auto">Three people. One spirit. Every trip, every grind, every memory — made better together.</p>
+    </div>
+
+    <div class="reveal triple-group-banner" style="margin-top:48px;border-radius:24px;overflow:hidden;max-height:420px;border:1px solid var(--border-gold);box-shadow:0 0 60px var(--shadow-purple);position:relative;">
+      <img src="photos/mandvi.jpg" alt="Triple Trouble at Mandvi beach" style="width:100%;height:420px;object-fit:cover;object-position:center 30%;display:block;" loading="lazy" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,4,10,0.85) 0%,transparent 50%);"></div>
+      <div style="position:absolute;bottom:28px;left:0;right:0;text-align:center;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.62rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;">Mandvi Beach · Sunset · Triple Trouble</span>
+      </div>
+    </div>
+
+    <div class="triple-cards">
+      <div class="triple-card reveal tilt-card" style="transition-delay:0.05s">
+        <div class="member-photo"><span class="member-initials">S</span></div>
+        <div class="member-name">Shreya</div>
+        <div class="member-role">The Heart of the Trio</div>
+        <div class="member-tags">
+          <span class="tag">Best Friend</span><span class="tag">Gym Buddy</span><span class="tag">Adventure Seeker</span>
+        </div>
+      </div>
+      <div class="triple-card king reveal tilt-card" style="transition-delay:0.1s">
+        <div class="member-photo">
+          <span class="member-crown" aria-hidden="true">👑</span>
+          <span class="member-initials">J</span>
+        </div>
+        <div class="member-name" style="color:var(--gold)">Jaideep</div>
+        <div class="member-role">The King · The Designer</div>
+        <div class="member-tags">
+          <span class="tag">Birthday Boy 🎂</span><span class="tag">Black Panther Fan</span><span class="tag">Design Wizard</span><span class="tag">Gym King</span>
+        </div>
+      </div>
+      <div class="triple-card reveal tilt-card" style="transition-delay:0.15s">
+        <div class="member-photo"><span class="member-initials">K</span></div>
+        <div class="member-name">Kevin</div>
+        <div class="member-role">Senior Developer</div>
+        <div class="member-tags">
+          <span class="tag">Best Friend</span><span class="tag">Code Wizard</span><span class="tag">Gym Buddy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GALLERY ==================== -->
+<section id="gallery">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Adventures Together</span>
+      <h2 class="section-title">Our <span>Trip Chronicles</span></h2>
+      <div class="divider"></div>
+      <p class="section-desc">Every road we've driven, every sunrise we've chased — the world looks better with Triple Trouble in it.</p>
+    </div>
+    <div class="gallery-masonry">
+      <div class="trip-card g-wide g-tall reveal" data-src="photos/mandvi.jpg" data-caption="Mandvi — Sunset, sand &amp; Triple Trouble magic" style="transition-delay:0.05s">
+        <img src="photos/mandvi.jpg" alt="Mandvi" loading="lazy" style="object-position:center 35%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name" style="font-size:1.3rem">Mandvi</div><div class="trip-desc">Sunset, sand &amp; Triple Trouble magic</div></div>
+      </div>
+      <div class="trip-card g-tall reveal" data-src="photos/diu.jpg" data-caption="Diu — Sun, sea &amp; Triple Trouble vibes" style="transition-delay:0.08s">
+        <img src="photos/diu.jpg" alt="Diu" loading="lazy" style="object-position:center 20%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Diu</div><div class="trip-desc">Sun, sea &amp; Triple Trouble vibes</div></div>
+      </div>
+      <div class="trip-card reveal" data-src="photos/jodhpur.jpg" data-caption="Jodhpur — Laughing through the Blue City" style="transition-delay:0.1s">
+        <img src="photos/jodhpur.jpg" alt="Jodhpur" loading="lazy" style="object-position:center 25%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Jodhpur</div><div class="trip-desc">Laughing through the Blue City</div></div>
+      </div>
+      <div class="trip-card reveal" data-src="photos/dwarka.jpg" data-caption="Dwarka — The sacred coast" style="transition-delay:0.12s">
+        <img src="photos/dwarka.jpg" alt="Dwarka" loading="lazy" style="object-position:center 40%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Dwarka</div><div class="trip-desc">The sacred coast — Triple Trouble blessed</div></div>
+      </div>
+      <div class="trip-card g-tall reveal" data-src="photos/vmtekri.jpg" data-caption="V M Tekri — Brothers at golden hour" style="transition-delay:0.14s">
+        <img src="photos/vmtekri.jpg" alt="V M Tekri" loading="lazy" style="object-position:center 20%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">V M Tekri</div><div class="trip-desc">Brothers at golden hour</div></div>
+      </div>
+      <div class="trip-card reveal" data-src="photos/bhuj.jpg" data-caption="Bhuj — Heritage walls &amp; triple smiles" style="transition-delay:0.16s">
+        <img src="photos/bhuj.jpg" alt="Bhuj — Sural Pith" loading="lazy" style="object-position:center 30%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Bhuj — Sural Pith</div><div class="trip-desc">Heritage walls &amp; triple smiles</div></div>
+      </div>
+      <div class="trip-card g-wide reveal" data-src="photos/dhordo.jpg" data-caption="Dhordo — Rann Utsav &amp; kite festival warmth" style="transition-delay:0.18s">
+        <img src="photos/dhordo.jpg" alt="Dhordo Kite Festival" loading="lazy" style="object-position:center 35%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Dhordo — Kite Festival</div><div class="trip-desc">Rann Utsav warmth &amp; winter smiles</div></div>
+      </div>
+      <div class="trip-card g-tall reveal" data-src="photos/kukma.jpg" data-caption="Ashapura Tekri — When the boys carry you to the top" style="transition-delay:0.2s">
+        <img src="photos/kukma.jpg" alt="Ashapura Tekri, Kukma" loading="lazy" style="object-position:center 20%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Ashapura Tekri — Kukma</div><div class="trip-desc">When the boys carry you to the top</div></div>
+      </div>
+      <div class="trip-card reveal" data-src="photos/smrutivan.jpg" data-caption="Smrutivan — Under the chrome rings, above the world" style="transition-delay:0.22s">
+        <img src="photos/smrutivan.jpg" alt="Smrutivan, Bhuj" loading="lazy" style="object-position:center 30%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Smrutivan — Bhuj</div><div class="trip-desc">Under the chrome rings, above the world</div></div>
+      </div>
+      <div class="trip-card g-wide reveal" data-src="photos/bhujiyo.jpg" data-caption="Bhujiyo Fort — Same height. Same outfit. Same energy." style="transition-delay:0.24s">
+        <img src="photos/bhujiyo.jpg" alt="Bhujiyo Fort" loading="lazy" style="object-position:center 20%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Bhujiyo Fort</div><div class="trip-desc">Same height. Same outfit. Same energy.</div></div>
+      </div>
+      <div class="trip-card reveal" data-src="photos/girnar.jpg" data-caption="Girnar — Two kings, one green wall" style="transition-delay:0.26s">
+        <img src="photos/girnar.jpg" alt="Girnar" loading="lazy" style="object-position:center 20%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Girnar</div><div class="trip-desc">Two kings, one green wall</div></div>
+      </div>
+      <div class="trip-card g-tall reveal" data-src="photos/dhinodhar.jpg" data-caption="Dhinodhar — Hilltop views &amp; matching fits" style="transition-delay:0.28s">
+        <img src="photos/dhinodhar.jpg" alt="Dhinodhar" loading="lazy" style="object-position:center 25%;" />
+        <div class="trip-overlay"></div>
+        <div class="trip-info"><div class="trip-name">Dhinodhar</div><div class="trip-desc">Hilltop views &amp; matching fits</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GYM ==================== -->
+<section id="gym">
+  <div class="container">
+    <div class="gym-layout">
+      <div class="reveal-left">
+        <span class="section-label">Gains &amp; Glory</span>
+        <h2 class="section-title">Gym <span>Buddies</span> for Life</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Every early morning, every heavy set, every post-workout protein shake — Jaideep and Kevin have pushed each other harder and celebrated every milestone together. The gym isn't just a place. It's a ritual.</p>
+        <div class="gym-stats">
+          <div class="gym-stat reveal" style="transition-delay:0.1s">
+            <span class="gym-stat-icon">
+              <svg width="30" height="30" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 8h3M18 8h3M3 16h3M18 16h3M6 12h12"/></svg>
+            </span>
+            <div class="gym-stat-val">Every Day</div>
+            <div class="gym-stat-label">Gym Schedule</div>
+          </div>
+          <div class="gym-stat reveal" style="transition-delay:0.15s">
+            <span class="gym-stat-icon">
+              <svg width="30" height="30" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </span>
+            <div class="gym-stat-val">Partners</div>
+            <div class="gym-stat-label">Accountability</div>
+          </div>
+          <div class="gym-stat reveal" style="transition-delay:0.2s">
+            <span class="gym-stat-icon">
+              <svg width="30" height="30" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+            <div class="gym-stat-val">No Excuses</div>
+            <div class="gym-stat-label">Discipline</div>
+          </div>
+          <div class="gym-stat reveal" style="transition-delay:0.25s">
+            <span class="gym-stat-icon">
+              <svg width="30" height="30" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <div class="gym-stat-val">Progress</div>
+            <div class="gym-stat-label">Always Improving</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="gym-visual">
+          <img src="photos/gym.jpg" alt="Kevin and Jaideep at Fitline Gym" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OFFICE LIFE ==================== -->
+<section id="office">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <span class="section-label">Where the Magic Happens</span>
+      <h2 class="section-title">Office <span>Life</span></h2>
+      <div class="divider" style="margin:20px auto 16px;"></div>
+      <p class="section-desc" style="margin:0 auto;">Same desk, same deadlines, different skills — Kevin codes it, Jaideep designs it, Shreya perfects it.</p>
+    </div>
+
+    <!-- Day One banner -->
+    <div class="reveal day-one-banner" style="margin-bottom:24px;border-radius:22px;overflow:hidden;border:2px solid var(--border-gold);box-shadow:0 0 60px var(--shadow-gold);position:relative;max-height:480px;">
+      <img src="photos/dayone.jpg" alt="Day One — Shreya, Kevin and Jaideep met" style="width:100%;height:480px;object-fit:cover;object-position:center 25%;display:block;" loading="lazy" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(4,4,10,0.88) 0%,transparent 55%);"></div>
+      <div class="day-one-text" style="position:absolute;top:50%;left:40px;transform:translateY(-50%);max-width:380px;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">The Origin Story</div>
+        <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:12px;">Day <span style="color:var(--gold)">One.</span></h2>
+        <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.6;">
+          See no evil. Hear no evil. Speak no evil.<br/>
+          Kevin, Jaideep &amp; Shreya — from strangers to Triple Trouble.<br/>
+          <span style="color:var(--purple-soft);">The best friendship that ever happened in an office.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="office-grid">
+      <div class="o-card reveal" style="transition-delay:0.05s" data-src="photos/office1.jpg" data-caption="The Crew — Office vibes">
+        <img src="photos/office1.jpg" alt="Office selfie" loading="lazy" style="object-position:center top;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title">The Crew</div><div class="o-card-sub">Office vibes</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.1s;border-color:var(--border-gold);" data-src="photos/office2.jpg" data-caption="Looking Down on It — Triple Trouble perspective">
+        <img src="photos/office2.jpg" alt="Sky shot" loading="lazy" style="object-position:center 40%;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--gold)">Looking Down on It</div><div class="o-card-sub">Triple Trouble perspective</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.15s" data-src="photos/office3.jpg" data-caption="Office Squad — AeonX crew">
+        <img src="photos/office3.jpg" alt="Office squad" loading="lazy" style="object-position:center top;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title">Office Squad</div><div class="o-card-sub">AeonX crew</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.2s;border-color:var(--border-gold);" data-src="photos/formals.jpg" data-caption="Formals Day — Dressed to impress">
+        <img src="photos/formals.jpg" alt="Formals day" loading="lazy" style="object-position:center top;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--gold)">Formals Day</div><div class="o-card-sub">Dressed to impress</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.25s" data-src="photos/navratri.jpg" data-caption="Navratri — Traditional &amp; together">
+        <img src="photos/navratri.jpg" alt="Navratri" loading="lazy" style="object-position:center 20%;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--purple-soft)">Navratri</div><div class="o-card-sub">Traditional &amp; together</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.3s;border-color:var(--border-gold);" data-src="photos/traditional.jpg" data-caption="Traditional Day — Diwali at AeonX">
+        <img src="photos/traditional.jpg" alt="Traditional day" loading="lazy" style="object-position:center top;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--gold)">Traditional Day</div><div class="o-card-sub">Diwali at AeonX</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.35s" data-src="photos/officelift.jpg" data-caption="Lift Selfie — Going up. Always.">
+        <img src="photos/officelift.jpg" alt="Lift selfie" loading="lazy" style="object-position:center top;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title">Lift Selfie</div><div class="o-card-sub">Going up. Always.</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.38s;border-color:rgba(110,231,247,0.25);" data-src="photos/devfest.jpg" data-caption="AeonX Dev Fest 2025 — #BuildWithAeonX">
+        <img src="photos/devfest.jpg" alt="DevFest 2025" loading="lazy" style="object-position:center 15%;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--vibranium)">AeonX Dev Fest 2025</div><div class="o-card-sub">#BuildWithAeonX</div></div>
+      </div>
+      <div class="o-card reveal" style="transition-delay:0.4s" data-src="photos/dhinodhar2.jpg" data-caption="Dhinodhar Trek — The whole squad on the hill">
+        <img src="photos/dhinodhar2.jpg" alt="Dhinodhar trek" loading="lazy" style="object-position:center 30%;" />
+        <div class="o-card-overlay"></div>
+        <div class="o-card-label"><div class="o-card-title" style="color:var(--purple-soft)">Dhinodhar Trek</div><div class="o-card-sub">The whole squad on the hill</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FUN FACTS ==================== -->
+<section id="funfacts">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Things That Make Jaideep, Jaideep</span>
+      <h2 class="section-title">Fun <span>Facts</span></h2>
+      <div class="divider" style="margin:20px auto 40px;"></div>
+    </div>
+    <div class="facts-grid">
+      <div class="fact-card reveal" style="transition-delay:0.05s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="fact-title">Black Panther Superfan</div>
+        <div class="fact-body">Wakanda isn't just a movie — it's a lifestyle. T'Challa's discipline, style, and power mirror everything Jaideep embodies.</div>
+      </div>
+      <div class="fact-card reveal" style="transition-delay:0.1s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s-8-6-8-12a8 8 0 0116 0c0 6-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="fact-title">Sukhi Bhel at Hamisar</div>
+        <div class="fact-body">Ask Jaideep where he wants to eat and the answer is always the same — sukhi bhel from Hamisar. A classic that never gets old.</div>
+      </div>
+      <div class="fact-card reveal" style="transition-delay:0.15s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="fact-title">Design Wizard</div>
+        <div class="fact-body">Every pixel placed with intention. Jaideep sees the world in gradients, whitespace, and perfect kerning — and makes it all beautiful.</div>
+      </div>
+      <div class="fact-card reveal" style="transition-delay:0.2s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="fact-title">Same Office, Same Vibe</div>
+        <div class="fact-body">Kevin codes it. Jaideep designs it. Shreya makes it better. The triple trouble workflow is undefeated — best team in the room.</div>
+      </div>
+      <div class="fact-card reveal" style="transition-delay:0.25s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M3 8h3M18 8h3M3 16h3M18 16h3M6 12h12"/></svg>
+        </div>
+        <div class="fact-title">Same Height, Same Heart</div>
+        <div class="fact-body">Kevin and Jaideep are basically the same person — same height, same taste, same energy. If one is in, the other is already in.</div>
+      </div>
+      <div class="fact-card reveal" style="transition-delay:0.3s">
+        <div class="fact-icon">
+          <svg width="28" height="28" fill="none" stroke="#ffd700" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+        </div>
+        <div class="fact-title">The Best Kind of Human</div>
+        <div class="fact-body">Beyond the design skills and the gym gains — Jaideep is genuinely a good person. Patient, funny, and always showing up.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WITH MAA ==================== -->
+<section id="withmaa">
+  <div class="container">
+    <div class="withmaa-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div class="reveal-left">
+        <div class="withmaa-photo" style="border-radius:24px;overflow:hidden;border:2px solid var(--border-gold);box-shadow:0 0 80px var(--shadow-gold);position:relative;aspect-ratio:3/4;">
+          <img src="photos/withmaa.jpg" alt="Jaideep with Maa and Kevin" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="lazy" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,4,10,0.75) 0%,transparent 60%);"></div>
+          <div style="position:absolute;bottom:20px;left:20px;">
+            <span style="font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;">Where it all begins</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="section-label">The Real Foundation</span>
+        <h2 class="section-title">With <span>Maa</span></h2>
+        <div class="divider"></div>
+        <p class="section-desc">Behind every king is a queen who raised him right. Jaideep's warmth, his kindness, his grounded nature — that all comes from home. From Maa. And the fact that Kevin is in this photo too just says everything about how deep this friendship runs — he's family too.</p>
+        <div style="margin-top:28px;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:background 0.55s,border-color 0.55s;">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulseDot 1.5s ease infinite;"></div>
+          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.6;font-style:italic;">"A good person at home is a great person everywhere."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MESSAGE ==================== -->
+<section id="message">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">From Kevin, With Love</span>
+      <h2 class="section-title" style="text-align:center">A <span>Message</span> for the King</h2>
+      <div class="divider" style="margin:20px auto 48px;"></div>
+    </div>
+    <div class="message-card reveal">
+      <p class="message-quote">
+        "25 years ago the world got a little more <em>designed</em>,
+        a little more brave, and a lot more fun —
+        and I got a best friend I didn't know I needed."
+      </p>
+      <p class="message-sub">
+        Jaideep, every trip we've taken, every rep we've pushed, every late-night office session —
+        you made it legendary. You don't just design screens, you design experiences.
+        You're not just a colleague, you're family. Kevin and Shreya are proud to call you Triple Trouble.
+        <br/><br/>
+        Today, Wakanda celebrates its King. <strong style="color:var(--gold)">Happy 25th Birthday, brother.</strong>
+        May this year bring you everything you've put into the world —
+        beauty, creativity, laughter, and unlimited sukhi bhel.
+      </p>
+      <div class="message-from">— Kevin &amp; Shreya · Triple Trouble · Forever</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-logo">Jaideep</div>
+  <div class="footer-wakanda">Wakanda Forever · Triple Trouble · 2026</div>
+  <div class="vibranium-line" style="width:200px;margin:20px auto;" aria-hidden="true"></div>
+  <p class="footer-copy">Made with love by <span>Kevin</span> for the greatest designer, gym buddy &amp; best friend.<br/>Happy 25th Birthday — the best is yet to come.</p>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('cursor');
+const trail  = document.getElementById('cursor-trail');
+let mx=-100, my=-100, tx=-100, ty=-100;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+(function animTrail(){
+  tx += (mx-tx)*0.12; ty += (my-ty)*0.12;
+  trail.style.left=tx+'px'; trail.style.top=ty+'px';
+  requestAnimationFrame(animTrail);
+})();
+document.querySelectorAll('a,button,.trip-card,.triple-card,.stat-card,.fact-card,.o-card,.gym-stat,.gym-visual').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.width='26px'; cursor.style.height='26px'; cursor.style.background='var(--purple-soft)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.width='16px'; cursor.style.height='16px'; cursor.style.background='var(--gold)'; });
+});
+
+// ===== SCROLL PROGRESS BAR =====
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+// ===== PARTICLE CANVAS =====
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+const COLORS = ['#ffd700','#8b2fc9','#b06fe8','#6ee7f7','#9b59b6','#f39c12','#e056fd'];
+function mkP(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*2+0.5, color:COLORS[Math.floor(Math.random()*COLORS.length)], vx:(Math.random()-0.5)*0.38, vy:(Math.random()-0.5)*0.38, a:Math.random()*0.5+0.2, pulse:Math.random()*Math.PI*2 }; }
+for(let i=0;i<110;i++) particles.push(mkP());
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.pulse+=0.014; p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+    const a = p.a*(0.7+0.3*Math.sin(p.pulse));
+    const alpha = Math.round(a*255).toString(16).padStart(2,'0');
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = p.color+alpha; ctx.fill();
+  });
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(139,47,201,${0.055*(1-d/100)})`; ctx.lineWidth=0.5; ctx.stroke(); }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ===== AGE COUNTER =====
+function countUp(el, target, duration){
+  let startTime=null;
+  function step(ts){
+    if(!startTime) startTime=ts;
+    const p=Math.min((ts-startTime)/duration,1);
+    const e=1-Math.pow(1-p,4);
+    el.textContent=Math.floor(e*target);
+    if(p<1) requestAnimationFrame(step); else el.textContent=target;
+  }
+  requestAnimationFrame(step);
+}
+const ageEl=document.getElementById('age-counter');
+let ageAnimated=false;
+new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !ageAnimated){ ageAnimated=true; setTimeout(()=>countUp(ageEl,25,1800),600); }
+},{threshold:0.5}).observe(ageEl);
+
+// ===== COUNTDOWN TIMER =====
+function updateCountdown(){
+  const now  = new Date();
+  const bday = new Date(now.getFullYear(), 4, 13, 0, 0, 0); // May 13
+  if(now >= bday) {
+    // It's birthday!
+    document.getElementById('countdown-wrap').innerHTML = '<div class="countdown-done">🎂 Happy Birthday, King! 🎂</div>';
+    document.getElementById('cd-label').textContent = 'The King has arrived!';
+    return;
+  }
+  const diff = bday - now;
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  const fmt = n => String(n).padStart(2,'0');
+  document.getElementById('cd-d').textContent = fmt(d);
+  document.getElementById('cd-h').textContent = fmt(h);
+  document.getElementById('cd-m').textContent = fmt(m);
+  document.getElementById('cd-s').textContent = fmt(s);
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ===== SCROLL REVEAL =====
+const revEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+},{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+revEls.forEach(el=>revObs.observe(el));
+
+// ===== CONFETTI =====
+const CCOLORS=['#ffd700','#8b2fc9','#6ee7f7','#b06fe8','#ff6b6b','#f39c12','#fff','#e056fd'];
+function launchConfetti(){
+  for(let i=0;i<90;i++){
+    const c=document.createElement('div');
+    c.className='confetti-piece';
+    const sz=Math.random()*8+5;
+    Object.assign(c.style,{
+      left:Math.random()*100+'vw', top:'-20px',
+      width:sz+'px', height:sz+(Math.random()>0.5?sz*1.5:sz)+'px',
+      background:CCOLORS[Math.floor(Math.random()*CCOLORS.length)],
+      borderRadius:Math.random()>0.5?'50%':'2px',
+      animationDuration:(Math.random()*3+2.5)+'s',
+      animationDelay:(Math.random()*1.5)+'s',
+    });
+    document.body.appendChild(c);
+    c.addEventListener('animationend',()=>c.remove());
+  }
+}
+window.addEventListener('load',()=>{ setTimeout(launchConfetti,800); setTimeout(launchConfetti,3200); });
+let msgDone=false;
+new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !msgDone){ msgDone=true; launchConfetti(); }
+},{threshold:0.3}).observe(document.getElementById('message'));
+
+// ===== LIGHTBOX =====
+const lb       = document.getElementById('lightbox');
+const lbImg    = document.getElementById('lb-img');
+const lbCap    = document.getElementById('lb-caption');
+const lbClose  = document.getElementById('lb-close');
+const lbPrev   = document.getElementById('lb-prev');
+const lbNext   = document.getElementById('lb-next');
+let lbItems = [];
+let lbIdx = 0;
+
+document.querySelectorAll('.trip-card[data-src], .o-card[data-src]').forEach((card, i) => {
+  lbItems.push({ src: card.dataset.src, caption: card.dataset.caption || '' });
+  card.addEventListener('click', () => openLB(i));
+});
+function openLB(i){
+  lbIdx = i;
+  lbImg.src = lbItems[i].src;
+  lbCap.textContent = lbItems[i].caption;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){ lb.classList.remove('open'); document.body.style.overflow=''; lbImg.src=''; }
+lbClose.addEventListener('click', closeLB);
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+lbPrev.addEventListener('click', e=>{ e.stopPropagation(); lbIdx=(lbIdx-1+lbItems.length)%lbItems.length; lbImg.src=lbItems[lbIdx].src; lbCap.textContent=lbItems[lbIdx].caption; });
+lbNext.addEventListener('click', e=>{ e.stopPropagation(); lbIdx=(lbIdx+1)%lbItems.length; lbImg.src=lbItems[lbIdx].src; lbCap.textContent=lbItems[lbIdx].caption; });
+document.addEventListener('keydown', e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLB(); if(e.key==='ArrowLeft') lbPrev.click(); if(e.key==='ArrowRight') lbNext.click(); });
+
+// ===== THEME TOGGLE =====
+const themeBtn  = document.getElementById('theme-btn');
+const ripple    = document.getElementById('theme-ripple');
+let transitioning = false;
+
+themeBtn.addEventListener('click', function(){
+  if(transitioning) return;
+  transitioning = true;
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const btnRect = themeBtn.getBoundingClientRect();
+  const cx = btnRect.left + btnRect.width/2;
+  const cy = btnRect.top  + btnRect.height/2;
+  const maxR = Math.hypot(Math.max(cx, window.innerWidth-cx), Math.max(cy, window.innerHeight-cy));
+  const diameter = maxR * 2;
+
+  // Position ripple at button
+  Object.assign(ripple.style,{
+    left: (cx - 5) + 'px',
+    top:  (cy - 5) + 'px',
+    width: '10px', height: '10px',
+    background: isLight ? '#04040a' : '#f6f2ff',
+    transform: 'scale(0)',
+    opacity: '1',
+    transition: 'none',
+  });
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      Object.assign(ripple.style,{
+        transition: `transform 0.7s cubic-bezier(0.4,0,0.2,1)`,
+        transform: `scale(${diameter / 5})`,
+      });
+      // Swap theme at midpoint
+      setTimeout(()=>{
+        document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+        localStorage.setItem('theme', isLight ? 'dark' : 'light');
+      }, 350);
+      // Fade out ripple
+      setTimeout(()=>{
+        ripple.style.transition = 'opacity 0.4s ease';
+        ripple.style.opacity = '0';
+        setTimeout(()=>{ ripple.style.transform='scale(0)'; transitioning=false; }, 420);
+      }, 600);
+    });
+  });
+});
+
+// Restore saved theme
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+
+// ===== PARALLAX =====
+window.addEventListener('scroll',()=>{
+  const sy = window.scrollY;
+  const hBg = document.querySelector('.hero-bg-glow');
+  if(hBg) hBg.style.transform=`translateY(${sy*0.3}px)`;
+},{passive:true});
+
+// ===== SCROLL TO TOP =====
+const scrollTopBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll',()=>{
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+},{passive:true});
+scrollTopBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ===== ACTIVE NAV =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+const navbar   = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{ if(window.scrollY >= s.offsetTop-140) current=s.id; });
+  navLinks.forEach(a=>{ a.classList.toggle('active', a.getAttribute('href')==='#'+current); });
+  navbar.classList.toggle('scrolled', window.scrollY > 80);
+},{passive:true});
+
+// ===== HAMBURGER MENU =====
+const hamBtn    = document.getElementById('ham-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+function openMenu(){ hamBtn.classList.add('open'); mobileMenu.classList.add('open'); hamBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+function closeMenu(){ hamBtn.classList.remove('open'); mobileMenu.classList.remove('open'); hamBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+hamBtn.addEventListener('click', ()=> hamBtn.classList.contains('open') ? closeMenu() : openMenu());
+document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+// ===== CARD 3D TILT =====
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width -0.5)*18;
+    const y=((e.clientY-r.top) /r.height-0.5)*-18;
+    card.style.transform=`perspective(800px) rotateX(${y}deg) rotateY(${x}deg) translateY(-10px) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+  });
+});
+</script>
+</body>
+</html>
