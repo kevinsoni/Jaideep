@@ -365,6 +365,66 @@
     .stat-num { font-family:'Orbitron',sans-serif; font-size:2rem; font-weight:700; color:var(--gold); line-height:1; }
     .stat-desc { font-size:0.85rem; color:var(--text-muted); margin-top:6px; }
 
+    /* ===== WHATSAPP PINNED MESSAGE ===== */
+    .wa-pinned-wrap {
+      display: flex; justify-content: center; margin-bottom: 40px;
+    }
+    .wa-pinned {
+      display: inline-flex; align-items: stretch; gap: 0;
+      background: #111b21; border-radius: 14px;
+      overflow: hidden; max-width: 400px; width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+      position: relative;
+      animation: waPinIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes waPinIn {
+      from { opacity:0; transform:translateY(-14px) scale(0.95); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    /* Green left accent bar */
+    .wa-pinned::before {
+      content: ''; flex-shrink: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #25d366, #128c7e);
+      display: block;
+    }
+
+    .wa-pinned-inner { padding: 11px 16px 11px 14px; flex: 1; min-width: 0; }
+
+    .wa-pinned-top {
+      display: flex; align-items: center; gap: 7px; margin-bottom: 5px;
+    }
+    .wa-pin-icon {
+      color: #25d366; flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .wa-pinned-label {
+      font-size: 0.68rem; font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.12em; color: #25d366; text-transform: uppercase;
+    }
+
+    .wa-pinned-msg {
+      font-family: 'Rajdhani', sans-serif; font-size: 1.05rem;
+      font-weight: 700; color: #e9edef; letter-spacing: 0.04em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wa-pinned-msg span { color: #25d366; }
+
+    .wa-pinned-meta {
+      margin-top: 5px; font-size: 0.68rem; color: #8696a0;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .wa-tick { color: #53bdeb; }
+
+    /* WhatsApp logo area */
+    .wa-logo-side {
+      width: 52px; flex-shrink: 0;
+      background: rgba(37,211,102,0.07);
+      display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid rgba(255,255,255,0.04);
+    }
+
     /* ===== TRIPLE TROUBLE ===== */
     #triple { background:var(--bg-dark); text-align:center; transition:background 0.55s; }
     .triple-badge { display:inline-block; font-family:'Cinzel',serif; font-size:2.5rem; font-weight:900; background:linear-gradient(135deg,var(--gold) 0%,var(--purple-soft) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
@@ -585,6 +645,144 @@
     .footer-wakanda { font-family:'Orbitron',sans-serif; font-size:0.63rem; letter-spacing:0.4em; color:var(--vibranium); text-transform:uppercase; margin-bottom:24px; }
     .footer-copy { font-size:0.8rem; color:var(--text-dim); }
     .footer-copy span { color:var(--gold); }
+
+    /* ===== AI WISDOM PANEL ===== */
+    #ai-btn-wrap {
+      position: fixed; bottom: 92px; right: 28px; z-index: 8000;
+      display: flex; align-items: center; gap: 10px;
+      flex-direction: row-reverse;
+      opacity: 0; visibility: hidden; transform: translateY(16px);
+      transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease;
+    }
+    #ai-btn-wrap.visible {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    #ai-btn {
+      width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(176,111,232,0.6); cursor: pointer;
+      background: linear-gradient(135deg, #2a0a3e, #8b2fc9);
+      box-shadow: 0 0 24px rgba(139,47,201,0.6), 0 0 0 0 rgba(139,47,201,0.4);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: aiPulse 2.2s ease-in-out infinite;
+    }
+    #ai-btn:hover { transform: scale(1.13); box-shadow: 0 0 50px rgba(139,47,201,0.9); }
+    @keyframes aiPulse {
+      0%   { box-shadow: 0 0 24px rgba(139,47,201,0.6), 0 0 0 0 rgba(139,47,201,0.45); }
+      60%  { box-shadow: 0 0 40px rgba(139,47,201,0.85), 0 0 0 14px rgba(139,47,201,0); }
+      100% { box-shadow: 0 0 24px rgba(139,47,201,0.6), 0 0 0 0 rgba(139,47,201,0); }
+    }
+
+    /* Label pill */
+    #ai-label {
+      background: linear-gradient(135deg, #2a0a3e, #5b1a8a);
+      border: 1px solid rgba(176,111,232,0.55);
+      border-radius: 30px; padding: 8px 16px;
+      color: #e0c4ff; font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem; letter-spacing: 0.12em; white-space: nowrap;
+      box-shadow: 0 0 20px rgba(139,47,201,0.4);
+      animation: labelBounce 2.2s ease-in-out infinite;
+      cursor: pointer;
+      line-height: 1.4; text-align: right;
+    }
+    #ai-label strong { display: block; color: #ffd700; font-size: 0.68rem; margin-bottom: 1px; }
+    @keyframes labelBounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
+    }
+    /* Hide label after first open */
+    #ai-label { transition: opacity 0.5s ease, visibility 0.5s ease; }
+    #ai-label.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Overlay backdrop */
+    #ai-backdrop {
+      position: fixed; inset: 0; z-index: 9100;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(3px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    #ai-backdrop.open { opacity: 1; visibility: visible; }
+
+    /* Slide-in panel */
+    #ai-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 9200;
+      width: min(420px, 92vw);
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-col);
+      box-shadow: -20px 0 80px rgba(90,20,140,0.4);
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    #ai-panel.open { transform: translateX(0); }
+
+    /* Panel header */
+    .ai-header {
+      padding: 22px 24px 18px;
+      background: linear-gradient(135deg, #1a0a2e 0%, #2a0a3e 100%);
+      border-bottom: 1px solid rgba(139,47,201,0.3);
+      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+    }
+    .ai-header-icon {
+      width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0;
+      background: linear-gradient(135deg, #5b1a8a, #8b2fc9);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 18px rgba(139,47,201,0.5);
+    }
+    .ai-header-text { flex: 1; }
+    .ai-header-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); }
+    .ai-header-sub { font-size: 0.72rem; color: var(--text-muted); font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; margin-top: 2px; }
+    .ai-close {
+      background: none; border: none; cursor: pointer; color: var(--text-muted);
+      padding: 4px; border-radius: 8px; transition: color 0.2s, background 0.2s;
+      display: flex; align-items: center;
+    }
+    .ai-close:hover { color: var(--text-primary); background: rgba(255,255,255,0.06); }
+
+    /* Panel body */
+    .ai-body { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .ai-body::-webkit-scrollbar { width: 4px; }
+    .ai-body::-webkit-scrollbar-track { background: transparent; }
+    .ai-body::-webkit-scrollbar-thumb { background: var(--purple-mid); border-radius: 4px; }
+
+    /* Intro message bubble */
+    .ai-intro {
+      background: linear-gradient(135deg, rgba(139,47,201,0.15), rgba(110,231,247,0.06));
+      border: 1px solid rgba(139,47,201,0.3); border-radius: 16px;
+      padding: 16px 18px; font-size: 0.9rem; line-height: 1.65;
+      color: var(--text-primary);
+    }
+    .ai-intro strong { color: var(--gold); }
+
+    /* Each advice card */
+    .ai-advice {
+      background: var(--bg-card2); border: 1px solid var(--border-col);
+      border-radius: 16px; padding: 16px 18px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      animation: adviceIn 0.5s ease both;
+    }
+    .ai-advice:hover { border-color: var(--purple-soft); box-shadow: 0 0 20px rgba(139,47,201,0.15); }
+    @keyframes adviceIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .ai-advice-icon {
+      width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .ai-advice-content { flex: 1; }
+    .ai-advice-title { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .ai-advice-body { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* Footer */
+    .ai-footer {
+      padding: 16px 24px; border-top: 1px solid var(--border-col);
+      text-align: center; font-size: 0.72rem; color: var(--text-dim);
+      font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; flex-shrink: 0;
+    }
+    .ai-footer span { color: var(--purple-soft); }
 
     /* ===== SCROLL TO TOP ===== */
     #scroll-top {
@@ -1468,6 +1666,106 @@
   </div>
 </div>
 
+<!-- AI Wisdom Button -->
+<div id="ai-btn-wrap">
+  <button id="ai-btn" aria-label="Open wisdom panel">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0c4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a5 5 0 0 1 5 5c0 2.5-1.5 4.5-3.5 5.4V14h-3v-1.6C8.5 11.5 7 9.5 7 7a5 5 0 0 1 5-5z"/>
+      <path d="M9 17h6M10 20h4"/>
+      <circle cx="12" cy="7" r="1" fill="#e0c4ff" stroke="none"/>
+    </svg>
+  </button>
+  <div id="ai-label" role="button" tabindex="0">
+    <strong>Words for the King 👑</strong>
+    FROM TRIPLE TROUBLE · TAP ME
+  </div>
+</div>
+
+<!-- AI Wisdom Backdrop -->
+<div id="ai-backdrop"></div>
+
+<!-- AI Wisdom Panel -->
+<div id="ai-panel" role="dialog" aria-label="Words from Triple Trouble">
+  <div class="ai-header">
+    <div class="ai-header-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0c4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+    </div>
+    <div class="ai-header-text">
+      <div class="ai-header-title">Words from Triple Trouble</div>
+      <div class="ai-header-sub">To the King · On His 25th</div>
+    </div>
+    <button class="ai-close" id="ai-close" aria-label="Close panel">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="ai-body">
+    <div class="ai-intro">
+      Hey <strong>Jaideep</strong> — 25 years in and you're still the one who makes everything better just by being there. Here's everything we need you to remember. Always. 💜
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.05s">
+      <div class="ai-advice-icon" style="background:rgba(255,215,0,0.12);">💛</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Never Forget Us</div>
+        <div class="ai-advice-body">No matter where life takes you — new city, new job, new chapter — Triple Trouble stays Triple Trouble. We don't forget. You don't forget. That's the deal.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.1s">
+      <div class="ai-advice-icon" style="background:rgba(139,47,201,0.15);">🤝</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Be Kind — Always</div>
+        <div class="ai-advice-body">You already are, but never stop. Kindness is rare. The world needs more of what you naturally give. Don't let anyone change that about you.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.15s">
+      <div class="ai-advice-icon" style="background:rgba(110,231,247,0.1);">🌱</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Be a Good Person</div>
+        <div class="ai-advice-body">Not just at work, not just with us — everywhere, with everyone. Your character is your legacy. Build it every single day.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.2s">
+      <div class="ai-advice-icon" style="background:rgba(243,156,18,0.12);">💪</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Keep Showing Up</div>
+        <div class="ai-advice-body">At the gym, at work, for your people. Consistency is your superpower. Don't lose it. The results speak for themselves.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.25s">
+      <div class="ai-advice-icon" style="background:rgba(139,47,201,0.12);">🎨</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Design Your Life Too</div>
+        <div class="ai-advice-body">You make everything beautiful for others. Do the same for your own life — your goals, your time, your happiness. You deserve it.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.3s">
+      <div class="ai-advice-icon" style="background:rgba(255,100,100,0.1);">❤️</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Stay Grounded</div>
+        <div class="ai-advice-body">Success will come — it already is. Stay the same humble, warm, real person. That's why everyone loves you. Don't change that core.</div>
+      </div>
+    </div>
+
+    <div class="ai-advice" style="animation-delay:0.35s">
+      <div class="ai-advice-icon" style="background:rgba(255,215,0,0.1);">🚀</div>
+      <div class="ai-advice-content">
+        <div class="ai-advice-title">Dream Bigger</div>
+        <div class="ai-advice-body">25 is just the beginning. Everything you want is possible — and we'll be right there cheering you on every step of the way. Always.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-footer">Made with ❤️ by <span>Kevin & Shreya</span> · Triple Trouble Forever</div>
+</div>
+
 <!-- Scroll to Top -->
 <button id="scroll-top" aria-label="Scroll to top">
   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -1574,6 +1872,34 @@
 <!-- ==================== TRIPLE TROUBLE ==================== -->
 <section id="triple">
   <div class="container">
+    <!-- WhatsApp Pinned Message -->
+    <div class="wa-pinned-wrap reveal">
+      <div class="wa-pinned">
+        <div class="wa-pinned-inner">
+          <div class="wa-pinned-top">
+            <!-- Pin icon -->
+            <span class="wa-pin-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5v6h2v-6h5v-2z"/></svg>
+            </span>
+            <span class="wa-pinned-label">Pinned Message</span>
+          </div>
+          <div class="wa-pinned-msg">TRIPLE TROUBLE &nbsp;·&nbsp; <span>NO EGO</span></div>
+          <div class="wa-pinned-meta">
+            <span>Triple Trouble 🔥</span>
+            <span style="margin:0 3px">·</span>
+            <span class="wa-tick">
+              <svg width="14" height="10" viewBox="0 0 16 11" fill="currentColor"><path d="M11.071.444L4.717 6.8 1.929 4.012 .515 5.426l4.202 4.202 7.768-7.768z"/><path d="M15.071.444L8.717 6.8l-.79-.79-1.414 1.414 2.204 2.204 7.768-7.768z"/></svg>
+            </span>
+            <span>Pinned by Kevin</span>
+          </div>
+        </div>
+        <div class="wa-logo-side">
+          <!-- WhatsApp icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.107 1.522 5.83L.054 23.25a.75.75 0 0 0 .916.972l5.699-1.49A11.937 11.937 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22.5a10.44 10.44 0 0 1-5.317-1.456l-.38-.228-3.946 1.033 1.05-3.84-.247-.393A10.44 10.44 0 0 1 1.5 12C1.5 6.201 6.201 1.5 12 1.5S22.5 6.201 22.5 12 17.799 22.5 12 22.5z"/></svg>
+        </div>
+      </div>
+    </div>
+
     <div class="reveal">
       <span class="section-label">The Legendary Trio</span>
       <div class="triple-badge">Triple Trouble</div>
@@ -2448,6 +2774,55 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
       }, 350);
     });
   });
+})();
+
+// ===== AI WISDOM PANEL =====
+(function(){
+  const wrap     = document.getElementById('ai-btn-wrap');
+  const btn      = document.getElementById('ai-btn');
+  const label    = document.getElementById('ai-label');
+  const panel    = document.getElementById('ai-panel');
+  const backdrop = document.getElementById('ai-backdrop');
+  const closeBtn = document.getElementById('ai-close');
+  const triple   = document.getElementById('triple');
+  if(!btn || !panel) return;
+
+  // Show once Triple Trouble section hits view — then stays forever
+  let labelTimer = null;
+  if(triple && wrap){
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          wrap.classList.add('visible');
+          // Auto-hide label after 3.5s
+          if(label && !label.classList.contains('hidden')){
+            clearTimeout(labelTimer);
+            labelTimer = setTimeout(()=>{ if(label) label.classList.add('hidden'); }, 3500);
+          }
+          obs.unobserve(triple); // stop watching — stay visible from now on
+        }
+      });
+    }, { threshold: 0.08 });
+    obs.observe(triple);
+  }
+
+  function openPanel(){
+    panel.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(label) label.classList.add('hidden');
+  }
+  function closePanel(){
+    panel.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', openPanel);
+  if(label){ label.addEventListener('click', openPanel); label.addEventListener('keydown', e=>{ if(e.key==='Enter') openPanel(); }); }
+  closeBtn.addEventListener('click', closePanel);
+  backdrop.addEventListener('click', closePanel);
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePanel(); });
 })();
 
 // ===== CARD 3D TILT =====
