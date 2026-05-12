@@ -901,6 +901,113 @@
       .ms-preview { display: none; }
     }
 
+    /* ===================== PASSWORD SCREEN ===================== */
+    #pw-screen {
+      position: fixed; inset: 0; z-index: 300000;
+      background: #04040a;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px; text-align: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #pw-screen.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Animated bg orbs */
+    .pw-orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; }
+    .pw-orb-1 { width: 70vw; height: 70vw; background: rgba(91,26,138,0.2); top: -25%; left: -15%; animation: orbFloat 16s ease-in-out infinite; }
+    .pw-orb-2 { width: 50vw; height: 50vw; background: rgba(110,231,247,0.07); bottom: -15%; right: -10%; animation: orbFloat 11s ease-in-out infinite reverse; }
+    .pw-orb-3 { width: 30vw; height: 30vw; background: rgba(255,215,0,0.05); top: 40%; left: 40%; animation: orbFloat 8s ease-in-out 2s infinite; }
+
+    .pw-inner { position: relative; z-index: 1; max-width: 420px; width: 100%; }
+
+    /* Panther mask icon */
+    .pw-icon {
+      width: 80px; height: 80px; margin: 0 auto 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a0a2e 0%, #5b1a8a 100%);
+      border: 2px solid rgba(176,111,232,0.5);
+      box-shadow: 0 0 40px rgba(139,47,201,0.5);
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeSlideDown 0.6s ease 0.1s both;
+    }
+
+    .pw-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 5vw, 2.4rem);
+      font-weight: 900; color: #f0eeff; margin-bottom: 8px;
+      animation: fadeSlideUp 0.7s ease 0.2s both;
+    }
+    .pw-title span { color: #ffd700; }
+
+    .pw-sub {
+      font-size: 0.95rem; color: rgba(144,144,192,0.65);
+      margin-bottom: 36px; line-height: 1.6;
+      animation: fadeSlideUp 0.7s ease 0.3s both;
+    }
+
+    /* Input group */
+    .pw-group {
+      position: relative; margin-bottom: 14px;
+      animation: fadeSlideUp 0.7s ease 0.4s both;
+    }
+    .pw-input {
+      width: 100%; padding: 16px 54px 16px 20px;
+      background: rgba(14,14,28,0.9);
+      border: 1.5px solid rgba(139,47,201,0.4);
+      border-radius: 14px;
+      color: #f0eeff; font-size: 1rem; font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.08em;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      caret-color: #ffd700;
+    }
+    .pw-input::placeholder { color: rgba(144,144,192,0.4); letter-spacing: 0.05em; }
+    .pw-input:focus { border-color: #8b2fc9; box-shadow: 0 0 0 3px rgba(139,47,201,0.2); }
+    .pw-input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.2); animation: pwShake 0.45s ease; }
+
+    /* Eye toggle */
+    .pw-eye {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; padding: 4px;
+      color: rgba(144,144,192,0.5); transition: color 0.2s;
+      display: flex; align-items: center;
+    }
+    .pw-eye:hover { color: #b06fe8; }
+
+    /* Error message */
+    .pw-error {
+      font-size: 0.82rem; color: #e74c3c;
+      min-height: 18px; margin-bottom: 16px;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .pw-error.visible { opacity: 1; }
+
+    /* Submit button */
+    .pw-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #5b1a8a, #8b2fc9);
+      color: #fff; border: none; border-radius: 14px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.7rem; letter-spacing: 0.18em;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s;
+      animation: fadeSlideUp 0.7s ease 0.5s both;
+    }
+    .pw-btn:hover { box-shadow: 0 0 40px rgba(139,47,201,0.6); transform: translateY(-2px); }
+    .pw-btn:active { transform: translateY(0); }
+
+    /* Claw decoration lines behind input */
+    .pw-claw {
+      position: absolute; pointer-events: none; opacity: 0.07;
+    }
+    .pw-claw.tl { top: -60px; left: -60px; transform: rotate(-15deg); }
+    .pw-claw.br { bottom: -60px; right: -60px; transform: rotate(165deg); }
+
+    @keyframes pwShake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-10px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(4px); }
+    }
+
     /* ===================== BIRTHDAY GATE ===================== */
     #birthday-gate {
       position: fixed; inset: 0; z-index: 200000;
@@ -1034,6 +1141,58 @@
   </style>
 </head>
 <body>
+
+<!-- ==================== PASSWORD SCREEN ==================== -->
+<div id="pw-screen">
+  <div class="pw-orb pw-orb-1"></div>
+  <div class="pw-orb pw-orb-2"></div>
+  <div class="pw-orb pw-orb-3"></div>
+
+  <!-- Claw decorations -->
+  <svg class="pw-claw tl" width="200" height="260" viewBox="0 0 220 300" fill="none" aria-hidden="true">
+    <path d="M0 0 L90 300" stroke="#8b2fc9" stroke-width="3"/>
+    <path d="M40 0 L130 300" stroke="#8b2fc9" stroke-width="2"/>
+    <path d="M80 0 L170 300" stroke="#8b2fc9" stroke-width="2.5"/>
+  </svg>
+  <svg class="pw-claw br" width="200" height="260" viewBox="0 0 220 300" fill="none" aria-hidden="true">
+    <path d="M0 0 L90 300" stroke="#8b2fc9" stroke-width="3"/>
+    <path d="M40 0 L130 300" stroke="#8b2fc9" stroke-width="2"/>
+    <path d="M80 0 L170 300" stroke="#8b2fc9" stroke-width="2.5"/>
+  </svg>
+
+  <div class="pw-inner">
+    <!-- Panther icon -->
+    <div class="pw-icon">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#b06fe8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+
+    <h1 class="pw-title">Wakanda <span>Forever</span></h1>
+    <p class="pw-sub">This celebration is exclusive.<br/>Enter the secret word to enter the kingdom.</p>
+
+    <div class="pw-group">
+      <input
+        id="pw-input"
+        class="pw-input"
+        type="password"
+        placeholder="Enter password..."
+        autocomplete="off"
+        spellcheck="false"
+        autofocus
+      />
+      <button class="pw-eye" id="pw-eye" aria-label="Toggle password visibility">
+        <svg id="pw-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="pw-error" id="pw-error">Incorrect password. Try again.</div>
+
+    <button class="pw-btn" id="pw-btn">ENTER THE KINGDOM</button>
+  </div>
+</div>
 
 <!-- ==================== MODE SELECTOR ==================== -->
 <div id="mode-selector">
@@ -2026,6 +2185,57 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
     // Restore scroll when gate is gone
     gate.addEventListener('animationend', ()=>{ document.body.style.overflow=''; }, { once: true });
   }
+})();
+
+// ===== PASSWORD SCREEN =====
+(function(){
+  const PW       = 'tripletrouble';
+  const screen   = document.getElementById('pw-screen');
+  const input    = document.getElementById('pw-input');
+  const btn      = document.getElementById('pw-btn');
+  const errMsg   = document.getElementById('pw-error');
+  const eyeBtn   = document.getElementById('pw-eye');
+  const eyeIcon  = document.getElementById('pw-eye-icon');
+
+  // Already unlocked this session?
+  if(sessionStorage.getItem('pw_ok') === '1'){
+    screen.classList.add('gone');
+    screen.addEventListener('transitionend', ()=> screen.remove(), { once: true });
+    return;
+  }
+
+  function unlock(){
+    sessionStorage.setItem('pw_ok', '1');
+    screen.classList.add('gone');
+    screen.addEventListener('transitionend', ()=> screen.remove(), { once: true });
+  }
+
+  function attempt(){
+    const val = input.value.trim().toLowerCase();
+    if(val === PW){
+      unlock();
+    } else {
+      errMsg.classList.add('visible');
+      input.classList.add('error');
+      input.value = '';
+      input.addEventListener('animationend', ()=> input.classList.remove('error'), { once: true });
+      setTimeout(()=> errMsg.classList.remove('visible'), 2800);
+      input.focus();
+    }
+  }
+
+  btn.addEventListener('click', attempt);
+  input.addEventListener('keydown', e=>{ if(e.key === 'Enter') attempt(); });
+
+  // Eye toggle (show/hide password)
+  let visible = false;
+  eyeBtn.addEventListener('click', ()=>{
+    visible = !visible;
+    input.type = visible ? 'text' : 'password';
+    eyeIcon.innerHTML = visible
+      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>'
+      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  });
 })();
 
 // ===== MODE SELECTOR =====
