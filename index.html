@@ -3195,22 +3195,33 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   const triple   = document.getElementById('triple');
   if(!btn || !panel) return;
 
-  // Show once Triple Trouble section hits view — then stays forever
+  // Show when Triple Trouble is in view or below — hide when scrolled back above it
   let labelTimer = null;
+  let labelShown = false;
   if(triple && wrap){
     const obs = new IntersectionObserver(entries=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
+          // Entering triple section — show button
           wrap.classList.add('visible');
-          // Auto-hide label after 3.5s
-          if(label && !label.classList.contains('hidden')){
+          if(label && !labelShown){
+            labelShown = true;
             clearTimeout(labelTimer);
             labelTimer = setTimeout(()=>{ if(label) label.classList.add('hidden'); }, 3500);
           }
-          obs.unobserve(triple); // stop watching — stay visible from now on
+        } else {
+          // Left triple section — check direction
+          // top > 0 means section is still below viewport (user scrolled back up)
+          if(e.boundingClientRect.top > 0){
+            wrap.classList.remove('visible');
+            // Reset label so it shows again next time
+            if(label){ label.classList.remove('hidden'); clearTimeout(labelTimer); }
+            labelShown = false;
+          }
+          // top < 0 means section went above (user scrolled past it) — keep button visible
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.05 });
     obs.observe(triple);
   }
 
