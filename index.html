@@ -2578,6 +2578,33 @@
   </div>
 </section>
 
+<!-- ==================== WITH MAA ==================== -->
+<section id="withmaa">
+  <div class="container">
+    <div class="withmaa-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div class="reveal-left">
+        <div class="withmaa-photo" style="border-radius:24px;overflow:hidden;border:2px solid var(--border-gold);box-shadow:0 0 80px var(--shadow-gold);position:relative;aspect-ratio:3/4;">
+          <img src="photos/withmaa.jpg" alt="Jaideep with Maa and Kevin" style="width:100%;height:100%;object-fit:cover;object-position:center 38%;" loading="lazy" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,4,10,0.75) 0%,transparent 60%);"></div>
+          <div style="position:absolute;bottom:20px;left:20px;">
+            <span style="font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;">Where it all begins</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="section-label">The Real Foundation</span>
+        <h2 class="section-title">With <span>Maa</span></h2>
+        <div class="divider"></div>
+        <p class="section-desc">Behind every king is a queen who raised him right. Jaideep's warmth, his kindness, his grounded nature — that all comes from home. From Maa. And the fact that Kevin is in this photo too just says everything about how deep this friendship runs — he's family too.</p>
+        <div style="margin-top:28px;background:rgba(14,14,28,0.48);border:1px solid var(--border-gold);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;animation:pulseDot 1.5s ease infinite;"></div>
+          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.6;font-style:italic;">"A good person at home is a great person everywhere."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== MESSAGE ==================== -->
 <section id="message">
   <div class="container">
@@ -2633,6 +2660,7 @@
       <a href="#gym"      style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Gym</a>
       <a href="#office"   style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Office</a>
       <a href="#funfacts" style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Fun Facts</a>
+      <a href="#withmaa"  style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">With Maa</a>
       <a href="#message"  style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--text-muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">Message</a>
     </nav>
 
@@ -3362,7 +3390,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   const toastDot = document.getElementById('toast-dot');
   if(!btn) return;
 
-  const SECTION_IDS = ['about','triple','gallery','gym','office','funfacts','message'];
+  const SECTION_IDS = ['about','triple','gallery','gym','office','funfacts','withmaa','message'];
   const SPEED       = 2.5;   // px per frame while crawling through section
   const NAV_H       = 70;    // navbar height offset
 
@@ -3375,7 +3403,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
   let phase       = 'idle'; // 'jumping' | 'crawling' | 'idle'
 
   const labels = { about:'About Jaideep', triple:'Triple Trouble', gallery:'Trip Chronicles',
-                   gym:'Gym & Gains', office:'Office Life', funfacts:'Fun Facts', message:'Message' };
+                   gym:'Gym & Gains', office:'Office Life', funfacts:'Fun Facts', withmaa:'With Maa', message:'Message' };
 
   function showToast(msg, state){
     toastMsg.textContent = msg;
